@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TalentManager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+  />
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  />
+
+  <link rel="icon" href="images/.png" alt="Logo" />
+
+</head>
+
+<body>
+<header class="header">
+  <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+    <div class="container-xxl">
+      <a class="navbar-brand me-auto d-flex align-items-center" href="index.html">
+        <img
+          src="/assets/img/talentManagerLogoBlanco.PNG"
+          alt="Logo"
+          width="50"
+          height="50"
+          class="d-inline-block"
+        />
+        <span class="brand-text ms-2">TalentManager</span>
+      </a>
+
+
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel"
+      >
+        <div class="offcanvas-header">
+          <a class="navbar-brand" href="#">
+            <img
+              src="/assets/img/talentManagerLogoBlanco.PNG"
+              alt="Logo"
+              width="30"
+              height="24"
+              class="d-inline-block align-text-top"
+            />
+            <span class="text-Talent">Talent</span
+            ><span class="text-Manager">Manager</span>
+          </a>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a
+                class="nav-link mx-lg-2"
+                aria-current="page"
+                href="index.html"
+              >Inicio</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-lg-2" href="index.html#swiper"
+              >Servicios</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-lg-2" href="index.html#suscribete"
+              >Suscribete</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-lg-2" href="index.html#nosotros"
+              >Nosotros</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-lg-2" href="index.html#contacto"
+              >Contacto</a
+              >
+            </li>
+          </ul>
+          <div class="d-lg-none text-center mt-3">
+            <a
+              href="login.html"
+              class="btn btn-outline-success w-75 rounded-pill botonIniciarSesion"
+            >Ir a la aplicación</a
+            >
+          </div>
+        </div>
+      </div>
+      <a href="#" class="login-button">Ir a la aplicación</a>
+      <button
+        class="navbar-toggler pe-0"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<div class="menu">
+  <div class="texto-principal">
+    <div class="contenido">
+      <h1>Todo tu equipo, en una sola plataforma</h1>
+      <hr class="lineaPrincipal" />
+      <p>
+        La solución ideal para optimizar la gestión del desempeño laboral de
+        tu empresa.
+      </p>
+    </div>
+  </div>
+</div>
+
+<section class="terceraseccion">
+  <div class="beneficios">
+    <h3 class="tituloBenificios">Los Beneficios de TalentManager</h3>
+    <div class="listabeneficios">
+      <div class="singlebene">
+        <svg
+          width="100px"
+          height="100px"
+          viewBox="0 0 28.00 28.00"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          stroke="#000000"
+          stroke-width="0.28"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              clip-rule="evenodd"
+              d="M14 20C17.3137 20 20 17.3137 20 14C20 10.6863 17.3137 8 14 8C10.6863 8 8 10.6863 8 14C8 17.3137 10.6863 20 14 20ZM18 14C18 16.2091 16.2091 18 14 18C11.7909 18 10 16.2091 10 14C10 11.7909 11.7909 10 14 10C16.2091 10 18 11.7909 18 14Z"
+              fill="#000000"
+              fill-rule="evenodd"
+            ></path>
+            <path
+              clip-rule="evenodd"
+              d="M0 12.9996V14.9996C0 16.5478 1.17261 17.822 2.67809 17.9826C2.80588 18.3459 2.95062 18.7011 3.11133 19.0473C2.12484 20.226 2.18536 21.984 3.29291 23.0916L4.70712 24.5058C5.78946 25.5881 7.49305 25.6706 8.67003 24.7531C9.1044 24.9688 9.55383 25.159 10.0163 25.3218C10.1769 26.8273 11.4511 28 12.9993 28H14.9993C16.5471 28 17.8211 26.8279 17.9821 25.3228C18.4024 25.175 18.8119 25.0046 19.2091 24.8129C20.3823 25.6664 22.0344 25.564 23.0926 24.5058L24.5068 23.0916C25.565 22.0334 25.6674 20.3813 24.814 19.2081C25.0054 18.8113 25.1757 18.4023 25.3234 17.9824C26.8282 17.8211 28 16.5472 28 14.9996V12.9996C28 11.452 26.8282 10.1782 25.3234 10.0169C25.1605 9.55375 24.9701 9.10374 24.7541 8.66883C25.6708 7.49189 25.5882 5.78888 24.5061 4.70681L23.0919 3.29259C21.9846 2.18531 20.2271 2.12455 19.0485 3.1103C18.7017 2.94935 18.3459 2.80441 17.982 2.67647C17.8207 1.17177 16.5468 0 14.9993 0H12.9993C11.4514 0 10.1773 1.17231 10.0164 2.6775C9.60779 2.8213 9.20936 2.98653 8.82251 3.17181C7.64444 2.12251 5.83764 2.16276 4.70782 3.29259L3.2936 4.7068C2.16377 5.83664 2.12352 7.64345 3.17285 8.82152C2.98737 9.20877 2.82199 9.60763 2.67809 10.0167C1.17261 10.1773 0 11.4515 0 12.9996ZM15.9993 3C15.9993 2.44772 15.5516 2 14.9993 2H12.9993C12.447 2 11.9993 2.44772 11.9993 3V3.38269C11.9993 3.85823 11.6626 4.26276 11.2059 4.39542C10.4966 4.60148 9.81974 4.88401 9.18495 5.23348C8.76836 5.46282 8.24425 5.41481 7.90799 5.07855L7.53624 4.70681C7.14572 4.31628 6.51256 4.31628 6.12203 4.7068L4.70782 6.12102C4.31729 6.51154 4.31729 7.14471 4.70782 7.53523L5.07958 7.90699C5.41584 8.24325 5.46385 8.76736 5.23451 9.18395C4.88485 9.8191 4.6022 10.4963 4.39611 11.2061C4.2635 11.6629 3.85894 11.9996 3.38334 11.9996H3C2.44772 11.9996 2 12.4474 2 12.9996V14.9996C2 15.5519 2.44772 15.9996 3 15.9996H3.38334C3.85894 15.9996 4.26349 16.3364 4.39611 16.7931C4.58954 17.4594 4.85042 18.0969 5.17085 18.6979C5.39202 19.1127 5.34095 19.6293 5.00855 19.9617L4.70712 20.2632C4.3166 20.6537 4.3166 21.2868 4.70712 21.6774L6.12134 23.0916C6.51186 23.4821 7.14503 23.4821 7.53555 23.0916L7.77887 22.8483C8.11899 22.5081 8.65055 22.4633 9.06879 22.7008C9.73695 23.0804 10.4531 23.3852 11.2059 23.6039C11.6626 23.7365 11.9993 24.1411 11.9993 24.6166V25C11.9993 25.5523 12.447 26 12.9993 26H14.9993C15.5516 26 15.9993 25.5523 15.9993 25V24.6174C15.9993 24.1418 16.3361 23.7372 16.7929 23.6046C17.5032 23.3985 18.1809 23.1157 18.8164 22.7658C19.233 22.5365 19.7571 22.5845 20.0934 22.9208L20.2642 23.0916C20.6547 23.4821 21.2879 23.4821 21.6784 23.0916L23.0926 21.6774C23.4831 21.2868 23.4831 20.6537 23.0926 20.2632L22.9218 20.0924C22.5855 19.7561 22.5375 19.232 22.7669 18.8154C23.1166 18.1802 23.3992 17.503 23.6053 16.7931C23.7379 16.3364 24.1425 15.9996 24.6181 15.9996H25C25.5523 15.9996 26 15.5519 26 14.9996V12.9996C26 12.4474 25.5523 11.9996 25 11.9996H24.6181C24.1425 11.9996 23.7379 11.6629 23.6053 11.2061C23.3866 10.4529 23.0817 9.73627 22.7019 9.06773C22.4643 8.64949 22.5092 8.11793 22.8493 7.77781L23.0919 7.53523C23.4824 7.14471 23.4824 6.51154 23.0919 6.12102L21.6777 4.7068C21.2872 4.31628 20.654 4.31628 20.2635 4.7068L19.9628 5.00748C19.6304 5.33988 19.1137 5.39096 18.6989 5.16979C18.0976 4.84915 17.4596 4.58815 16.7929 4.39467C16.3361 4.2621 15.9993 3.85752 15.9993 3.38187V3Z"
+              fill="#000000"
+              fill-rule="evenodd"
+            ></path>
+          </g>
+        </svg>
+        <p>Gestión Eficiente</p>
+      </div>
+      <div class="singlebene">
+        <svg
+          width="100px"
+          height="100px"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke="#CCCCCC"
+            stroke-width="0.72"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M4 4V16C4 18.2091 5.79086 20 8 20H20"
+              stroke="#000000"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+            <path
+              d="M6.59869 14.5841C6.43397 14.8057 6.48012 15.1189 6.70176 15.2837C6.9234 15.4484 7.2366 15.4022 7.40131 15.1806L6.59869 14.5841ZM19.4779 4.85296C19.3967 4.58903 19.1169 4.4409 18.853 4.52211L14.552 5.8455C14.288 5.92671 14.1399 6.2065 14.2211 6.47043C14.3023 6.73436 14.5821 6.88249 14.846 6.80128L18.6692 5.62493L19.8455 9.44805C19.9267 9.71198 20.2065 9.8601 20.4704 9.7789C20.7344 9.69769 20.8825 9.41789 20.8013 9.15396L19.4779 4.85296ZM13.5434 12.4067L13.1671 12.7359L13.5434 12.4067ZM15.1797 12.2161L15.6216 12.45L15.1797 12.2161ZM7.40131 15.1806L10.6621 10.7929L9.85952 10.1964L6.59869 14.5841L7.40131 15.1806ZM11.4397 10.7619L13.1671 12.7359L13.9196 12.0774L12.1923 10.1034L11.4397 10.7619ZM15.6216 12.45L19.4419 5.23394L18.5581 4.76606L14.7378 11.9821L15.6216 12.45ZM13.1671 12.7359C13.8594 13.5272 15.1297 13.3792 15.6216 12.45L14.7378 11.9821C14.5739 12.2919 14.1504 12.3412 13.9196 12.0774L13.1671 12.7359ZM10.6621 10.7929C10.8522 10.5371 11.2299 10.522 11.4397 10.7619L12.1923 10.1034C11.5628 9.38385 10.4298 9.42903 9.85952 10.1964L10.6621 10.7929Z"
+              fill="#000000"
+            ></path>
+          </g>
+        </svg>
+        <p>Seguimiento en tiempo real</p>
+      </div>
+      <div class="singlebene">
+        <svg
+          width="100px"
+          height="100px"
+          viewBox="0 0 1024 1024"
+          class="icon"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#000000"
+          stroke="#000000"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              fill="#000000"
+              d="M878.08 448H241.92l-96 384h636.16l96-384zM832 384v-64H485.76L357.504 192H128v448l57.92-231.744A32 32 0 01216.96 384H832zm-24.96 512H96a32 32 0 01-32-32V160a32 32 0 0132-32h287.872l128.384 128H864a32 32 0 0132 32v96h23.04a32 32 0 0131.04 39.744l-112 448A32 32 0 01807.04 896z"
+            ></path>
+          </g>
+        </svg>
+        <p>Organización centralizada</p>
+      </div>
+      <div class="singlebene">
+        <svg
+          width="100px"
+          height="100px"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          stroke="#000000"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M8 16L4.35009 13.3929C2.24773 11.8912 1 9.46667 1 6.88306V3L8 0L15 3V6.88306C15 9.46667 13.7523 11.8912 11.6499 13.3929L8 16ZM12.2071 5.70711L10.7929 4.29289L7 8.08579L5.20711 6.29289L3.79289 7.70711L7 10.9142L12.2071 5.70711Z"
+              fill="#000000"
+            ></path>
+          </g>
+        </svg>
+        <p>Datos Seguros</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mitad">
+  <hr class="lineaMitad" />
+  <p class="textoMitad">Descubre el verdadero talento de tu equipo</p>
+  <hr class="lineaMitad" />
+</div>
+
+<div class="swiper" id="swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <div class="contenedorInfo2">
+        <img src="/assets/img/hombreTrabajando.jpeg" alt="" class="imgBrand2" />
+        <div class="textoBrand2">
+          <p class="titleBrand2">Fichas de trabajador personalizadas</p>
+          <div class="linea2"></div>
+          Con TalentManager, cada miembro de tu equipo tiene su propia ficha
+          digital. Desde datos personales hasta evaluaciones de desempeño.
+          <br /><br />
+          ¡Tener control completo sobre la información de tu equipo nunca
+          fue tan sencillo!
+        </div>
+      </div>
+    </div>
+
+    <div class="swiper-slide">
+      <div class="contenedorInfo2">
+        <div class="textoBrand2">
+          <p class="titleBrand2">Sistemas de evaluación</p>
+          <div class="linea2"></div>
+          TalentManager te permite evaluar a tus colaboradores de forma
+          estructurada y objetiva, mediante una combinación de datos
+          numéricos automatizados con observaciones cualitativas
+          <br /><br />
+          ¡Simplifica el seguimiento de rendimiento de tu empresa!
+        </div>
+        <img src="/assets/img/reportes.jpg" alt="" class="imgBrand2" />
+      </div>
+    </div>
+
+    <div class="swiper-slide">
+      <div class="contenedorInfo2">
+        <img src="/assets/img/reportesAuto.png" class="imgBrand2" />
+        <div class="textoBrand2">
+          <p class="titleBrand2">Reportes automáticos</p>
+          <div class="linea2"></div>
+          Nuestra plataforma genera reportes de forma automática. Obtén
+          informes mensuales, acumulados, individuales por equipo que
+          reflejan el rendimiento real de tus colaboradores.
+          <br /><br />
+          ¡Ahorra tiempo y obtén datos certeros para visualizar el desempeño
+          de tu negocio en cada etapa!
+        </div>
+      </div>
+    </div>
+
+    <div class="swiper-slide">
+      <div class="contenedorInfo2">
+        <div class="textoBrand2">
+          <p class="titleBrand2">Búsqueda avanzada</p>
+          <div class="linea2"></div>
+          Accede rápidamente a la información requerida de cualquier miembro
+          de tu equipo gracias al sistema de búsqueda avanzada de
+          TalentManager.
+          <br /><br />
+          Actúa con rapidez y precisión en base a la información que
+          necesites, en cualquier momento.
+        </div>
+        <img src="/assets/img/busquedaAvanzada.png" alt="" class="imgBrand2" />
+      </div>
+    </div>
+
+    <div class="swiper-slide">
+      <div class="contenedorInfo2">
+        <img src="/assets/img/accesoMultiusuario.jpg" alt="" class="imgBrand2" />
+        <div class="textoBrand2">
+          <p class="titleBrand2">Acceso multiusuario</p>
+          <div class="linea2"></div>
+          TalentManager está diseñado para trabajar colaborativamente sin
+          perder el control. Asigna permisos y accesos personalizados para
+          diferentes miembros de tu equipo.
+          <br /><br />
+          ¡Garantiza una colaboración eficiente entre todos los niveles de
+          tu empresa!
+        </div>
+      </div>
+    </div>
+
+    <div class="swiper-slide">
+      <div class="contenedorInfo2">
+        <div class="textoBrand2">
+          <p class="titleBrand2">Panel de análisis</p>
+          <div class="linea2"></div>
+          Obtén acceso a un panel de análisis que te ofrecerá una vista
+          panorámica del desempeño de tu organización con TalentManager,
+          actualizada en tiempo real.
+          <br /><br />
+          Con datos claros y actualizados, lidera con información precisa y
+          responde a los desafíos con decisiones basadas en hechos.
+        </div>
+        <img src="/assets/img/panelAnalisis.png" alt="" class="imgBrand2" />
+      </div>
+    </div>
+  </div>
+
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+
+<section class="seccionPrecios" id="suscribete">
+  <div class="cuadroPrecio">
+    <h2 class="tituloPlan"> Plan Premium</h2>
+    <p class="precio">$200</p>
+    <p>Empresas medianas, espacio de almacenamiento aumentado</p>
+    <hr>
+    <p>20 equipos</p>
+    <p>100 miembros</p>
+    <p>Reportes mensuales</p>
+    <hr>
+    <a href="#" class="btnComprar">Comprar</a>
+  </div>
+
+  <div class="cuadroPrecio">
+    <h2 class="tituloPlan"> Plan Ultra</h2>
+    <p class="precio">$500</p>
+    <p>Empresas medianas a grandes, mayor espacio de almacenamiento y soporte especializado</p>
+    <hr>
+    <p>50 equipos</p>
+    <p>600 miembros</p>
+    <p>Reportes mensuales</p>
+    <hr>
+    <a href="#" class="btnComprar">Comprar</a>
+  </div>
+
+  <div class="cuadroPrecio">
+    <h2 class="tituloPlan"> Plan Platinum</h2>
+    <p class="precio">$2000</p>
+    <p>Empresas grandes, espacio de almacenamiento máximo y soporte 24/7</p>
+    <hr>
+    <p>Equipos ilimitados</p>
+    <p>Miembros ilimitados</p>
+    <p>Reportes semanales</p>
+    <hr>
+    <a href="#" class="btnComprar">Comprar</a>
+  </div>
+</section>
+
+<div id="nosotros">
+  <div class="texto-principal-nosotros">
+    <h1>Sobre Nosotros</h1>
+  </div>
+  <hr class="lineaMitad" />
+
+  <section class="sobreEquipoApp">
+    <div class="bloqueNosotros textoBERSS">
+      <h2>Sobre BERSS</h2>
+      <p>BERSS es una startup peruana de base estudiantil que desarrolla soluciones digitales innovadoras para transformar la gestión del talento humano, integrando tecnología, empatía y conocimiento para impulsar el crecimiento de las personas y organizaciones.
+      </p>
+      <p>Nuestro escudo está representado por nuestras mascotas, símbolo de la lealtad que guía nuestro compromiso con los usuarios: una lealtad que cultivamos a través de un proceso continuo de mejora y que, a su vez, aspiramos a inspirar en quienes confían en nosotros.</p>
+    </div>
+
+    <div class="bloqueNosotros imagen">
+      <img src="/assets/img/escudoBERSS.png" alt="EscudoBERSS" class="escudo" />
+    </div>
+  </section>
+
+  <section class="sobreEquipoApp">
+
+    <div class="bloqueNosotros imagen">
+      <img src="/assets/img/talentManagerLogoNegro.png" alt="LogoTalentManager" class="escudo" />
+    </div>
+
+    <div class="bloqueNosotros textoTalentManager">
+      <h2>Sobre TalentManager</h2>
+      <p>TalentManager es una aplicación web de suscripción que permite a empresas medianas y grandes registrar, evaluar y hacer seguimiento al desempeño de sus trabajadores mediante un sistema flexible de puntajes, reportes automáticos y criterios personalizables.
+      </p>
+    </div>
+
+  </section>
+</div>
+<section>
+  <div id="contacto">
+    <form class="formulario">
+      <fieldset>
+        <legend>Contacto TalentManager</legend>
+
+        <div class="contenedor-campos">
+          <div class="campo">
+            <label>Nombre</label>
+            <input class="input-text" type="text" placeholder="Ingresa tu nombre">
+          </div>
+
+          <div class="campo">
+            <label>Teléfono</label>
+            <input class="input-text" type="tel" placeholder="Ingresa tu teléfono">
+          </div>
+
+          <div class="campo">
+            <label>Correo</label>
+            <input class="input-text" type="email" placeholder="Ingresa tu email">
+          </div>
+
+          <div class="campo">
+            <label>Mensaje</label>
+            <textarea class="input-text" placeholder="Ingresa tu mensaje"></textarea>
+          </div>
+        </div> <!-- .contenedor-campos -->
+
+        <div class="campo checkbox-politica">
+          <label>
+            <input type="checkbox" required />
+            <span>Acepto dar mis datos a TalentManager <span style="color: red;">*</span></span>
+          </label>
+        </div>
+
+        <div class="alinear-derecha flex">
+          <input class="boton w-sm-100" type="submit" value="Enviar">
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>
+
+
+<footer class="site-footer">
+  <div class="grid-footer contenedor">
+    <div class="footer-section">
+      <h3>Redes Sociales</h3>
+      <a href="#">Youtube</a>
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+    </div>
+
+    <div class="footer-section">
+      <h3>Sobre Nosotros</h3>
+      <a href="#">Nuestra Historia</a>
+      <a href="#">Misión, visión y valores</a>
+      <a href="#">Políticas y Privacidad</a>
+      <a href="#">Términos del Servicios</a>
+    </div>
+
+    <div class="footer-section">
+      <h3>Soporte</h3>
+      <a href="#">Atención al cliente</a>
+      <a href="#">Preguntas frecuentes</a>
+      <a href="#">Contacto</a>
+    </div>
+  </div>
+
+  <p class="copyright">Copyright © 2025 BERSS, INC</p>
+</footer>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="js/swiper.js"></script>p
+</body>
+</html>
