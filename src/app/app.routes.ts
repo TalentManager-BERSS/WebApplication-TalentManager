@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-//Agregar aqui los componentes
+import {Toolbar} from '../shared/components/toolbar/toolbar.component';
+
 export const routes: Routes = [
-  { path: 'home',             component: '' },
-  { path: 'reports',             component: '' },
-  { path: 'dashboards',             component: '' },
-  { path: 'support',             component: '' },
-  { path: 'logout',             component: '' },
+  { path: 'home',             component: Toolbar },
+  { path: 'reports',             component: Toolbar },
+  { path: 'dashboards',             component: Toolbar },
+  { path: 'support',             component: Toolbar },
+  { path: 'logout',             component: Toolbar },
 
 ];
-
