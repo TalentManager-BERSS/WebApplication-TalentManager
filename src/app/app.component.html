@@ -1,1 +1,16 @@
+<mat-drawer-container class="custom-container">
+  <mat-drawer class="sidenav" mode="side" opened>
+    <nav>
+      <ul>
+        @for (option of options; track option.label) {
+          <li mat-button [routerLink]="option.link" routerLinkActive="active"><i class="material-icons">{{ option.icon}}</i> {{ option.label | translate }}</li>
+        }
+      </ul>
+    </nav>
+  </mat-drawer>
 
+  <mat-drawer-container>
+    <router-outlet class="main-content"/>
+
+  </mat-drawer-container>
+</mat-drawer-container>
