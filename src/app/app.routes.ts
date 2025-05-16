@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
-import {Toolbar} from '../shared/components/toolbar/toolbar.component';
-
+import {CourseManagementComponent} from './Employees/pages/Home/components/home.component';
+//Agregar aqui los componentes
 export const routes: Routes = [
-  { path: 'home',             component: Toolbar },
-  { path: 'reports',             component: Toolbar },
-  { path: 'dashboards',             component: Toolbar },
-  { path: 'support',             component: Toolbar },
-  { path: 'logout',             component: Toolbar },
+  { path: 'home',             component: CourseManagementComponent },
+  //{ path: 'reports',             component: '' },
+  //{ path: 'dashboards',             component: '' },
+  //{ path: 'support',             component: '' },
+  //{ path: 'logout',             component: '' },
 
 ];
+
