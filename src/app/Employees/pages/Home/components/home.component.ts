@@ -1,15 +1,23 @@
 import {Component} from '@angular/core';
-import {CourseManagementComponent} from '../../../components/Add-Employee/add-employee.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-component',
   standalone: true,
   imports: [
-    CourseManagementComponent
+
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent{
+  constructor(private router: Router) {}
 
+  goToAddEmployees() {
+    this.router.navigate(['/add']);
+
+  }
+  goToManageEmployees() {
+    this.router.navigate(['/manage']);
+  }
 }
