@@ -1,14 +1,27 @@
 {
-  "app": {
-    "title": "CatchUp News"
-  },
-  "sources": {
-    "title": "News Sources"
-  },
-  "articles": {
-    "title": "Top Headlines"
-  },
-  "article": {
-    "read-more": "Read more"
-  }
+  "Home": "Home",
+  "Reports": "Reports",
+  "Dashboards": "Dashboards",
+  "Support": "Support",
+  "Login": "Log in",
+  "Logout": "Log out",
+  "Reports-Phrase": "Review and generate reports",
+  "Generate": "Generate",
+  "Record": "Record",
+  "Send": "Send",
+  "Support-Contact": "Technical support will contact you soon!",
+  "Query": "Write your query",
+  "Support-Phrase": "Quick and efficient support for you",
+  "Support-Email": "Support email",
+  "Register": "Register",
+  "Username": "Username",
+  "Email": "Email",
+  "Password": "Password",
+  "ConfirmPassword": "Confirm Password",
+  "WelcomeTM": "Welcome to TalentManager!",
+  "Back": "Back",
+  "Employees": "Employees",
+  "Supervise": "Supervise your team",
+  "Add": "Add",
+  "Manage": "Manage"
 }
