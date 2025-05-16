@@ -1,16 +1,26 @@
-import { Routes } from '@angular/router';
-import {SupportComponent} from './Employees/pages/Support/components/support.component'
-import {ReportsComponent} from './Employees/pages/Reports/components/reports.component';
-import {HomeComponent} from './Employees/pages/Home/components/home.component';
+import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
+import {provideTranslateService, TranslateLoader} from '@ngx-translate/core';
+import {HttpClient, provideHttpClient} from '@angular/common/http';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {provideRouter} from '@angular/router';
+import {routes} from './app.routes';
 
-//Agregar aqui los componentes
-export const routes: Routes = [
-  { path: 'home',             component: HomeComponent },
-  { path: 'reports',             component: ReportsComponent },
-  //{ path: 'dashboards',             component: '' },
-  { path: 'support',             component: SupportComponent },
+const httpLoaderFactory: (http: HttpClient) =>
+  TranslateLoader = (http: HttpClient) =>
+  new TranslateHttpLoader(http, './i18n/', '.json');
 
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideZoneChangeDetection({eventCoalescing: true}),
+    provideHttpClient(),
+    provideRouter(routes),
 
-
-];
-
+    provideTranslateService({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'en',
+    })],
+};
