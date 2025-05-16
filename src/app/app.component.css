@@ -84,7 +84,7 @@
 }
 
 .main-content {
-  padding: 20px;
+  padding: 0px;
   background-color: #fff;
-  flex: 1;
+  height: 100%;
 }
