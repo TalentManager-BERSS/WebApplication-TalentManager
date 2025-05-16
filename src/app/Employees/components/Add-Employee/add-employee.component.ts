@@ -61,7 +61,7 @@ export class CourseManagementComponent implements OnInit, AfterViewInit {
   protected courseData!: Employee;
 
   /** Defines which columns should be displayed in the table and their order */
-  protected columnsToDisplay: string[] = ['id', 'title', 'description', 'actions'];
+  protected columnsToDisplay: string[] = ['id', 'title', 'description', 'ocupation', 'entrydate', 'team', 'actions'];
 
   /** Reference to the Material paginator for handling page-based data display */
   @ViewChild(MatPaginator, {static: false})
