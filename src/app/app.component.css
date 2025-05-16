@@ -49,6 +49,7 @@
   margin-top: auto;
   position: absolute;
   bottom: 20px;
+  width: 80%;
 }
 .sidenav nav ul {
   list-style: none;
