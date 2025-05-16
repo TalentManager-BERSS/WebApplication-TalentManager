@@ -19,11 +19,10 @@ import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatIcon} from "@angular/material/icon";
 import {NgClass} from "@angular/common";
 
-import {
-  EmployeeCreateAndEditComponent
-} from '../../../components/employee-create-and-edit/employee-create-and-edit.component';
-import {EmployeeService} from '../services/course.service';
+
 import {Employee} from '../../../model/employee.entity';
+import {EmployeeService} from '../services/employee.service';
+import {EmployeeCreateAndEditComponent} from '../../../components/employee-create-and-edit/employee-create-and-edit';
 
 /**
  * Component responsible for managing courses through a table interface.
