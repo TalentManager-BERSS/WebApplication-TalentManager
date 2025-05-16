@@ -6,10 +6,19 @@ export class Employee {
   id: number;
 
   /** Title of the employee */
-  title: string;
+  name: string;
 
   /** Detailed description of the employee content */
-  description: string;
+  adress: string;
+
+  ocupation: string;
+
+  entrydate: string;
+
+  team: string;
+
+
+
 
   /**
    * Creates a new employee instance
@@ -18,9 +27,13 @@ export class Employee {
    * @param employee.title - The employee title (defaults to empty string if not provided)
    * @param employee.description - The employee description (defaults to empty string if not provided)
    */
-  constructor(employee: {id?: number, title?: string, description?: string}) {
+  constructor(employee: {id?: number, name?: string, adress?: string, ocupation?: string, entrydate?: string, team?: string}) {
     this.id = employee.id || 0;
-    this.title = employee.title || '';
-    this.description = employee.description || '';
+    this.name = employee.name || '';
+    this.adress = employee.adress || '';
+    this.ocupation = employee.ocupation || '';
+    this.entrydate = employee.entrydate || '';
+    this.team = employee.team || '';
+
   }
 }
