@@ -1,7 +1,14 @@
 .center{
   text-align: center;
 }
+.titulo{
+  font-size: 40px;
 
+}
+.pa{
+  margin: 50px auto;
+  font-size: 20px;
+}
 .boton{
   display: flex;
   flex-direction: column;
