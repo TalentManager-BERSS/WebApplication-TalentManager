@@ -6,8 +6,8 @@ import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-login-page',
-  templateUrl: './login-page.component.component.html',
-  styleUrl: './login-page.component.component.css',
+  templateUrl: './login-page.component.html',
+  styleUrl: './login-page.component.css',
   imports: [MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
