@@ -1,0 +1,29 @@
+<div class="loginpage">
+  <div class="loginform">
+    <mat-card appearance="outlined">
+      <mat-card-header class="center-header">
+        <h1>Log in</h1>
+      </mat-card-header>
+      <mat-card-content class="buttons">
+        <div class="form-fields">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'Username' | translate }}</mat-label>
+            <input matInput type="text" [(ngModel)]="username">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'Password' | translate }}</mat-label>
+            <input matInput type="password" [(ngModel)]="password">
+          </mat-form-field>
+
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="center-actions">
+        <button (click)="handleLogin()" mat-flat-button color="primary">{{ 'Login' | translate }}</button>
+        <button (click)="goToRegister()" mat-flat-button color="secondary">{{ 'Register' | translate }}</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div class="loginimage">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuphMb4mq-EcVWhMVT8FCkv5dqZGgvn_QiA&s" alt="User icon" class="circle-image">
+  </div>
+</div>

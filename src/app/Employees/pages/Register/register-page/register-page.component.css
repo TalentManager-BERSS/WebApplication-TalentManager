@@ -1,0 +1,45 @@
+.register-page {
+  justify-content: space-around;
+  align-content: center;
+  height: 100%;
+  display: flex;
+  width: 100%;
+}
+
+.register-form {
+  max-width: 900px;
+  margin: auto;
+  width: 100%;
+  height: auto;
+  align-self: center;
+  justify-self: center;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+
+.center-header {
+  display: flex;
+  justify-content: center;
+}
+
+.center-header h1 {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+}
+
+.center-actions {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 16px;
+  gap: 10px;
+}

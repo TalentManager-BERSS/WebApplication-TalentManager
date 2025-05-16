@@ -1,0 +1,21 @@
+h1{
+  text-align: center;
+  font-size: 45px;
+}
+h2 {
+  text-align: center;
+  font-weight: normal;
+}
+
+
+.border {
+
+  margin: 0 auto;
+  padding: 10px 50px;
+  border: 4px solid #865DFF;
+  border-radius: 20px;
+  min-width: min-content;
+  width: fit-content;
+  min-height: min-content;
+  height: fit-content;
+}

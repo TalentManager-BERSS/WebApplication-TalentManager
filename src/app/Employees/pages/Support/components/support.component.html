@@ -1,0 +1,7 @@
+<h1>{{ 'Support' | translate }}</h1>
+<h2 *ngIf="!messageSend">{{ 'Support-Phrase' | translate }}</h2>
+
+<div class="border">
+  <app-support-message *ngIf="!messageSend"/>
+  <app-support-send *ngIf="messageSend"/>
+</div>
