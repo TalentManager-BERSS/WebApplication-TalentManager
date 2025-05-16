@@ -1,9 +1,7 @@
 .center{
   text-align: center;
 }
-.titulo-reporte{
-  margin-top: 60px;
-}
+
 .boton{
   display: flex;
   flex-direction: column;
