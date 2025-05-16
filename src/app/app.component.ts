@@ -26,7 +26,7 @@ export class AppComponent {
     {link: '/reports', label: 'Reports', icon: 'insert_chart'},
     {link: '/dashboards', label: 'Dashboards', icon: 'dashboard'},
     {link: '/support', label: 'Support', icon: 'headset_mic'},
-    {link: '/logout', label: 'Logout', icon: 'logout'},
+    {link: '/login', label: 'Logout', icon: 'logout'},
   ]
 
 
