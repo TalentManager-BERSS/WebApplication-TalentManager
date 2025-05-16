@@ -2,13 +2,12 @@ import {Component} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatAnchor} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-root',
   imports: [
     MatSidenavModule,
-    MatAnchor,
     RouterLink,
     RouterOutlet,
     RouterLinkActive,
