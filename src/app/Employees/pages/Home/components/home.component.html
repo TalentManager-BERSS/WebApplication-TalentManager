@@ -1,5 +1,6 @@
-<div class="home-container">
-  <h1>Home</h1>
+<div class="home-container" *ngIf="vista === 2">
+
+<h1>Home</h1>
   <p>Supervisa a tu equipo</p>
 
   <div class="card-container">
@@ -30,3 +31,6 @@
     </div>
   </div>
 </div>
+
+<app-add-employee *ngIf="vista === 0"/>
+<app-list-employee *ngIf="vista === 1"/>
