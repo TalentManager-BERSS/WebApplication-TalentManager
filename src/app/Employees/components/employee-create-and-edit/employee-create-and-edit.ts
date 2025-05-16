@@ -5,7 +5,7 @@ import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 
 import {Employee} from '../../model/employee.entity';
-import {BaseFormComponent} from '../../../../shared/components/base-form.component';
+import {BaseFormComponent} from '../../../../shared/components/base-form.components';
 
 /**
  * Component for creating and editing course information.
@@ -19,9 +19,9 @@ import {BaseFormComponent} from '../../../../shared/components/base-form.compone
     MatButton,
     MatInput
   ],
-  templateUrl: './employee-create-and-edit.component.html',
+  templateUrl: './employee-create-and-edit.html',
   standalone: true,
-  styleUrl: './employee-create-and-edit.component.css'
+  styleUrl: './employee-create-and-edit.css'
 })
 export class EmployeeCreateAndEditComponent extends BaseFormComponent {
   //#region Attributes
