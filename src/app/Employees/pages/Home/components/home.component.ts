@@ -1,23 +1,30 @@
 import {Component} from '@angular/core';
-import {Router} from '@angular/router';
+import {ListEmployeeComponent} from '../../../components/List-employee/list-employee.component';
+import {EmployeeAddComponent} from '../../../components/Add-Employee/add-employee.component';
+import {NgIf} from '@angular/common';
+import {Employee} from '../../../model/employee.entity';
 
 @Component({
   selector: 'app-home-component',
   standalone: true,
   imports: [
-
+    ListEmployeeComponent,
+    EmployeeAddComponent,
+    NgIf
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent{
-  constructor(private router: Router) {}
+  public selectedEmployee: Employee = new Employee({});
+  public vista = 2;
+  public realeEditMode = false;
 
   goToAddEmployees() {
-    this.router.navigate(['/add']);
+    this.vista = 0;
 
   }
   goToManageEmployees() {
-    this.router.navigate(['/manage']);
+    this.vista = 1;
   }
 }
