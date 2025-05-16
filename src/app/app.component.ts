@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {Toolbar} from '../shared/components/toolbar/toolbar.component';
 
 
 @Component({
@@ -11,7 +12,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     RouterLink,
     RouterOutlet,
     RouterLinkActive,
-    TranslatePipe
+    TranslatePipe,
+    Toolbar
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
