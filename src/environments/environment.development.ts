@@ -6,5 +6,5 @@ export const environment = {
   // Server Base URL for Spring Boot REST API
   // serverBaseURL: 'http://localhost:8080/api/v1'
   serverBaseUrl: 'https://681fc1f272e59f922ef71049.mockapi.io/api/v1',
-  coursesEndpointPath: '/courses',
+  coursesEndpointPath: '/employee',
 };
