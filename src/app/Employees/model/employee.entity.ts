@@ -9,7 +9,7 @@ export class Employee {
   name: string;
 
   /** Detailed description of the employee content */
-  adress: string;
+  lastname: string;
 
   ocupation: string;
 
@@ -27,10 +27,10 @@ export class Employee {
    * @param employee.title - The employee title (defaults to empty string if not provided)
    * @param employee.description - The employee description (defaults to empty string if not provided)
    */
-  constructor(employee: {id?: number, name?: string, adress?: string, ocupation?: string, entrydate?: string, team?: string}) {
+  constructor(employee: {id?: number, name?: string, lastname?: string, ocupation?: string, entrydate?: string, team?: string}) {
     this.id = employee.id || 0;
     this.name = employee.name || '';
-    this.adress = employee.adress || '';
+    this.lastname = employee.lastname || '';
     this.ocupation = employee.ocupation || '';
     this.entrydate = employee.entrydate || '';
     this.team = employee.team || '';
