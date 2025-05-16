@@ -1,0 +1,12 @@
+<div class="middle">
+  <form>
+    <label for="query">{{ 'Query' | translate }}</label>
+    <div class="center">
+
+      <textarea id="query" placeholder="..."></textarea>
+      <button type="button" (click)="sendMessage()" >{{ 'Send' | translate }}</button>
+      <p>{{ 'Support-Email' | translate }}: <a :href="">{{email}}</a></p>
+      <p>WhatsApp: +51 978 216 476</p>
+    </div>
+  </form>
+</div>

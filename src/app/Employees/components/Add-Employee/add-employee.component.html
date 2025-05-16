@@ -1,0 +1,15 @@
+<!-- Course catalogue -->
+<div class="table-wrapper">
+  <h1>{{ 'Employees' | translate }}</h1>
+
+  <!-- Add/Edit Form -->
+  <app-employee-create-and-edit
+    (cancelRequested)="onCancelRequested()"
+    (courseAddRequested)="onCourseAddRequested($event)"
+    (courseUpdateRequested)="onCourseUpdateRequested($event)"
+    [course]="courseData"
+    [editMode]="editMode">
+  </app-employee-create-and-edit>
+
+
+</div>
