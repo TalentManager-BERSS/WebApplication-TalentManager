@@ -12,8 +12,9 @@
 
 .back-button {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
   background-color: black;
   color: white;
   border: none;
@@ -29,13 +30,15 @@ h1 {
   margin-bottom: 2.5rem;
   font-weight: 700;
   text-align: center;
+  padding-top: 2rem;
 }
 
 .stats-table {
   border-collapse: collapse;
-  width: 90%;
-  max-width: 900px;
+  width: 100%;
+  max-width: 1350px;
   margin: 0 auto;
+  padding-top: 1.5rem;
 }
 
 .stats-table th,

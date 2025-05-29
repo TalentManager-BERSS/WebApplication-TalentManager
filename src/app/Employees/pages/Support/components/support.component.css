@@ -1,3 +1,7 @@
+.all {
+  width: 100%;
+}
+
 h1{
   text-align: center;
   font-size: 45px;
@@ -9,7 +13,6 @@ h2 {
 
 
 .border {
-
   margin: 0 auto;
   padding: 10px 50px;
   border: 4px solid #865DFF;

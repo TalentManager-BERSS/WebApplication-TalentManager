@@ -1,12 +1,12 @@
 <div class="dashboard-screen">
   <div class="header">
-    <h1>Dashboard</h1>
-    <h2>Consult and elaborate reports</h2>
+    <h1>{{ 'Dashboard' | translate }}</h1>
+    <h2>{{ 'Dashboard-Desc' | translate }}</h2>
   </div>
 
   <div class="form-section">
     <mat-form-field appearance="fill">
-      <mat-label>Month and year</mat-label>
+      <mat-label>{{ 'MM-and-YYYY' | translate }}</mat-label>
       <input matInput [matDatepicker]="picker" [formControl]="monthYearControl" readonly>
       <mat-datepicker #picker startView="multi-year" (monthSelected)="chosenMonthHandler($event, picker)"
                       (yearSelected)="chosenYearHandler($event)" panelClass="month-picker"
@@ -16,19 +16,19 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Input goal ($)</mat-label>
-      <input matInput placeholder="Set a goal here" type="number" min="0" step="100" [(ngModel)]="inputGoal">
+      <mat-label>{{ 'input-goal' | translate }}</mat-label>
+      <input matInput :placeholder="{{ 'set-goal' | translate }}" type="number" min="0" step="100" [(ngModel)]="inputGoal">
     </mat-form-field>
   </div>
   <div class="tab-team">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <th mat-header-cell *matHeaderCellDef> {{ 'name' | translate }} </th>
         <td mat-cell *matCellDef="let group"> {{group.name}} </td>
       </ng-container>
 
       <ng-container matColumnDef="input">
-        <th mat-header-cell *matHeaderCellDef> Input </th>
+        <th mat-header-cell *matHeaderCellDef> {{ 'input' | translate }} </th>
         <td mat-cell *matCellDef="let group"> {{group.input}} </td>
       </ng-container>
 
@@ -38,6 +38,6 @@
   </div>
 
   <div>
-    <button @click="" mat-flat-button class="details" (click)="goToDetail()">Detailed view</button>
+    <button @click="" mat-flat-button class="details" (click)="goToDetail()">{{ 'detailed-view' | translate }}</button>
   </div>
 </div>

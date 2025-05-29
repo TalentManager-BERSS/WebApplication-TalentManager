@@ -8,6 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {TranslatePipe} from '@ngx-translate/core';
 
 export interface TableInfo {
   name: string;
@@ -31,6 +32,7 @@ const DATA: TableInfo[] = [
     MatTableModule,
     MatNativeDateModule,
     MatButtonModule,
+    TranslatePipe,
   ],
   templateUrl: './dashboard-main.component.html',
   styleUrls: ['./dashboard-main.component.css'],

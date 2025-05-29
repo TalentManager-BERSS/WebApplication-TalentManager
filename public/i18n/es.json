@@ -1,7 +1,7 @@
 {
   "Home": "Principal",
   "Reports": "Reportes",
-  "Dashboards": "Paneles de análisis",
+  "Dashboards": "Panel de análisis",
   "Support": "Soporte",
   "Login": "Iniciar sesión",
   "Logout": "Cerrar sesión",
@@ -23,5 +23,19 @@
   "Employees": "Empleados",
   "Supervise": "Supervisa tu equipo",
   "Add": "Agregar",
-  "Manage": "Gestionar"
+  "Manage": "Gestionar",
+
+  "Dashboard": "Panel de análisis",
+  "Dashboard-Desc": "Crea y elabora reportes",
+  "MM-and-YYYY": "Mes y Año",
+  "set-goal": "Establezca una meta",
+  "input-goal": "Meta de ingresos ($)",
+  "name": "Nombre",
+
+  "team": "Equipo",
+  "members": "Miembros",
+  "input": "Ingreso ($)",
+
+  "detailed-view": "Vista detallada",
+  "technical-contact": "Soporte técnico se pondrá en contacto con usted"
 }

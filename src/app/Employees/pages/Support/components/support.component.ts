@@ -13,5 +13,4 @@ import {TranslatePipe} from '@ngx-translate/core';
 })
 export class SupportComponent {
   public messageSend = false;
-
 }

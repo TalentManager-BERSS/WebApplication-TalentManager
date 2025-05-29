@@ -1,7 +1,7 @@
 {
   "Home": "Home",
   "Reports": "Reports",
-  "Dashboards": "Dashboards",
+  "Dashboards": "Dashboard",
   "Support": "Support",
   "Login": "Log in",
   "Logout": "Log out",
@@ -23,5 +23,19 @@
   "Employees": "Employees",
   "Supervise": "Supervise your team",
   "Add": "Add",
-  "Manage": "Manage"
+  "Manage": "Manage",
+
+  "Dashboard": "Dashboard",
+  "Dashboard-Desc": "Create and elaborate reports",
+  "MM-and-YYYY": "Month and Year",
+  "set-goal": "Set a monthly goal",
+  "input-goal": "Input goal ($)",
+  "name": "Name",
+
+  "team": "Team",
+  "members": "Members",
+  "input": "Input ($)",
+
+  "detailed-view": "Detailed view",
+  "technical-contact": "Technical support will contact you soon"
 }

@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-support-send',
-  imports: [],
+  imports: [
+    TranslatePipe
+  ],
   templateUrl: './support-send.component.html',
   styleUrl: './support-send.component.css'
 })
