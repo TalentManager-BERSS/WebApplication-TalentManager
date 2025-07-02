@@ -37,5 +37,102 @@
   "input": "Input ($)",
 
   "detailed-view": "Detailed view",
-  "technical-contact": "Technical support will contact you soon"
+  "technical-contact": "Technical support will contact you soon",
+  "detailed-statistics": "Detailed statistics",
+
+  "generate": {
+    "title": "Generate",
+    "goBack": "Go back",
+    "monthlyReport": "REPORT OF THE MONTH",
+    "data": "Data",
+    "avgAttendance": "Average attendance",
+    "avgTardiness": "Average tardiness",
+    "avgHoursWorked": "Average hours worked per week",
+    "avgPermits": "Average number of personal permits requested",
+    "unjustifiedAbsences": "Number of unjustified absences",
+    "warningsRecorded": "Number of warnings recorded",
+    "avgPerformance": "Average performance evaluation",
+    "avgGoals": "Average goal achievement",
+    "avgLateTasks": "Average number of late tasks",
+    "registeredEmployees": "Registered Employees – {{ count }}",
+    "lowPerformance": "Low performance",
+    "comingSoon": "COMING SOON"
+  },
+
+  "report": {
+    "editTitle": "Edit Report",
+    "newTitle": "New Report",
+    "datePlaceholder": "Date",
+    "numberPlaceholder": "Number",
+    "update": "Update",
+    "add": "Add",
+    "cancel": "Cancel"
+  },
+
+  "catalogue": {
+    "reportsTitle": "Reports",
+    "id": "ID",
+    "date": "Date",
+    "orderNumber": "Order Number",
+    "actions": "Actions",
+    "sortById": "Sort by ID",
+    "sortByDate": "Sort by Date",
+    "sortByOrder": "Sort by Order Number",
+    "editIcon": "edit",
+    "deleteIcon": "delete"
+  },
+
+  "employee": {
+    "editTitle": "Edit Employee",
+    "newTitle": "New Employee",
+    "name": "Name",
+    "lastname": "Lastname",
+    "ocupation": "Occupation",
+    "entryDate": "Entry Date",
+    "team": "Team",
+    "update": "Update",
+    "add": "Add",
+    "cancel": "Cancel"
+  },
+
+  "employeeTable": {
+    "id": "ID",
+    "name": "Name",
+    "lastname": "Lastname",
+    "ocupation": "Occupation",
+    "entryDate": "Entry Date",
+    "team": "Team",
+    "actions": "Actions",
+    "editIcon": "edit",
+    "deleteIcon": "delete"
+  },
+
+
+  "paginator": {
+    "itemsPerPage": "Items per page:",
+    "nextPage": "Next page",
+    "previousPage": "Previous page",
+    "firstPage": "First page",
+    "lastPage": "Last page",
+    "range": "{{start}} – {{end}} of {{length}}",
+    "rangeZero": "0 of {{length}}"
+  },
+
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
+
+  "performance": "Performance"
+
 }

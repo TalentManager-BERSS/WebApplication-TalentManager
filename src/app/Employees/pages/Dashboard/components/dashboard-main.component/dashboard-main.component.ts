@@ -16,9 +16,9 @@ export interface TableInfo {
 }
 
 const DATA: TableInfo[] = [
-  { name: 'Team 1', input: 'Próximamente' },
-  { name: 'Team 2', input: 'Próximamente' },
-  { name: 'Team 3', input: 'Próximamente' },
+  { name: 'Team 1', input: '$ 5700' },
+  { name: 'Team 2', input: '$ 2700' },
+  { name: 'Team 3', input: '$ 2200' },
 ];
 
 @Component({

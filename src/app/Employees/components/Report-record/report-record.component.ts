@@ -21,6 +21,7 @@ import {NgClass} from "@angular/common";
 import {ReportCreateAndEditComponent} from '../report-create-and-edit/report-create-and-edit.component';
 import {Report} from '../../model/reporte.entity';
 import {ReportService} from '../../pages/Reports/services/report.service';
+import {TranslatePipe} from '@ngx-translate/core';
 
 
 
@@ -48,7 +49,8 @@ import {ReportService} from '../../pages/Reports/services/report.service';
     MatHeaderRow,
     MatRow,
     MatPaginator,
-    MatSortHeader
+    MatSortHeader,
+    TranslatePipe
   ],
   templateUrl: './report-record.component.html',
   styleUrl: './report-record.component.css'

@@ -5,6 +5,7 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {BaseFormComponent} from '../../../../shared/components/base-form.components';
+import {TranslatePipe} from '@ngx-translate/core';
 
 /**
  * Component for creating and editing course information.
@@ -16,7 +17,8 @@ import {BaseFormComponent} from '../../../../shared/components/base-form.compone
     MatFormField,
     FormsModule,
     MatButton,
-    MatInput
+    MatInput,
+    TranslatePipe
   ],
   templateUrl: './report-create-and-edit.component.html',
   styleUrl: './report-create-and-edit.component.css'

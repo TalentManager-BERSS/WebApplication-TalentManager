@@ -21,6 +21,7 @@ import {NgClass} from "@angular/common";
 import {Employee} from '../../model/employee.entity';
 import {EmployeeService} from '../../pages/Home/services/employee.service';
 import {HomeComponent} from '../../pages/Home/components/home.component';
+import {TranslatePipe} from '@ngx-translate/core';
 
 
 
@@ -47,7 +48,8 @@ import {HomeComponent} from '../../pages/Home/components/home.component';
     MatHeaderRow,
     MatRow,
     MatPaginator,
-    MatSortHeader
+    MatSortHeader,
+    TranslatePipe
   ],
   templateUrl: './list-employee.component.html',
   styleUrl: './list-employee.component.css'

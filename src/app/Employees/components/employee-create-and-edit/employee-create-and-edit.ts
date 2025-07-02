@@ -6,6 +6,7 @@ import {MatInput} from "@angular/material/input";
 
 import {Employee} from '../../model/employee.entity';
 import {BaseFormComponent} from '../../../../shared/components/base-form.components';
+import {TranslatePipe} from '@ngx-translate/core';
 
 /**
  * Component for creating and editing course information.
@@ -17,7 +18,8 @@ import {BaseFormComponent} from '../../../../shared/components/base-form.compone
     MatFormField,
     FormsModule,
     MatButton,
-    MatInput
+    MatInput,
+    TranslatePipe
   ],
   templateUrl: './employee-create-and-edit.html',
   standalone: true,

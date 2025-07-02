@@ -1,38 +1,37 @@
 <!-- Create and Edit Course -->
 
 <div class="form-section border">
-  <h2>{{ editMode ? 'Edit Course' : 'Nuevo Empleado' }}</h2>
-
+  <h2>{{ editMode ? ('employee.editTitle' | translate) : ('employee.newTitle' | translate) }}</h2>
 
   <form #courseForm="ngForm" (submit)="onSubmit()" class="form-grid-custom">
 
     <mat-form-field appearance="outline">
-      <input [(ngModel)]="course.name" matInput name="name" placeholder="Name" required>
+      <input [(ngModel)]="course.name" matInput name="name" [placeholder]="'employee.name' | translate" required>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <input [(ngModel)]="course.lastname" matInput name="lastname" placeholder="Lastname" required>
+      <input [(ngModel)]="course.lastname" matInput name="lastname" [placeholder]="'employee.lastname' | translate" required>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="col-span-2">
-      <input [(ngModel)]="course.ocupation" matInput name="ocupation" placeholder="Ocupation">
+      <input [(ngModel)]="course.ocupation" matInput name="ocupation" [placeholder]="'employee.ocupation' | translate">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <input [(ngModel)]="course.entrydate" matInput name="entrydate" placeholder="Entry Date">
+      <input [(ngModel)]="course.entrydate" matInput name="entrydate" [placeholder]="'employee.entryDate' | translate">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <input [(ngModel)]="course.team" matInput name="team" placeholder="Team">
+      <input [(ngModel)]="course.team" matInput name="team" [placeholder]="'employee.team' | translate">
     </mat-form-field>
 
     <!-- Botones que ocupan las dos columnas -->
     <div class="form-buttons col-span-2">
       <button type="submit" color="primary" mat-raised-button>
-        {{ isEditMode() ? 'Update' : 'Add' }}
+        {{ isEditMode() ? ('employee.update' | translate) : ('employee.add' | translate) }}
       </button>
       <button type="button" (click)="onCancel()" color="warn" mat-raised-button>
-        Cancel
+        {{ 'employee.cancel' | translate }}
       </button>
     </div>
 

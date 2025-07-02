@@ -1,5 +1,5 @@
 .custom-toolbar {
-  background-color: #a78bfa; /* color violeta */
+  background-color: #a78bfa;
   color: white;
   padding: 0 20px;
   height: 64px;
@@ -13,9 +13,13 @@ body{
 }
 
 .app-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 20px;
   font-weight: bold;
 }
+
 
 .spacer {
   flex: 1 1 auto;
@@ -35,4 +39,9 @@ body{
   width: 38px;
   text-align: center;
   line-height: 1;
+}
+
+.logo-img {
+  height: 32px;
+  width: auto;
 }

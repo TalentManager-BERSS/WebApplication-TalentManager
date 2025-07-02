@@ -1,5 +1,5 @@
 {
-  "Home": "Principal",
+  "Home": "Inicio",
   "Reports": "Reportes",
   "Dashboards": "Panel de análisis",
   "Support": "Soporte",
@@ -37,5 +37,100 @@
   "input": "Ingreso ($)",
 
   "detailed-view": "Vista detallada",
-  "technical-contact": "Soporte técnico se pondrá en contacto con usted"
+  "technical-contact": "Soporte técnico se pondrá en contacto con usted",
+  "detailed-statistics": "Estadisticas detalladas",
+
+  "generate": {
+    "title": "Generar",
+    "goBack": "Volver",
+    "monthlyReport": "INFORME DEL MES",
+    "data": "Dato",
+    "avgAttendance": "Asistencia promedio",
+    "avgTardiness": "Tardanza promedio",
+    "avgHoursWorked": "Horas trabajadas promedio por semana",
+    "avgPermits": "Permisos personales solicitados (promedio)",
+    "unjustifiedAbsences": "Número de inasistencias injustificadas",
+    "warningsRecorded": "Número de advertencias registradas",
+    "avgPerformance": "Evaluación de desempeño promedio",
+    "avgGoals": "Promedio de cumplimiento de objetivos",
+    "avgLateTasks": "Promedio de tareas entregadas tarde",
+    "registeredEmployees": "Empleados registrados – {{ count }}",
+    "lowPerformance": "Bajo desempeño",
+    "comingSoon": "PRÓXIMAMENTE"
+  },
+
+  "report": {
+    "editTitle": "Editar informe",
+    "newTitle": "Nuevo informe",
+    "datePlaceholder": "Fecha",
+    "numberPlaceholder": "Número",
+    "update": "Actualizar",
+    "add": "Agregar",
+    "cancel": "Cancelar"
+  },
+
+  "catalogue": {
+    "reportsTitle": "Informes",
+    "id": "ID",
+    "date": "Fecha",
+    "orderNumber": "Número de orden",
+    "actions": "Acciones",
+    "sortById": "Ordenar por ID",
+    "sortByDate": "Ordenar por fecha",
+    "sortByOrder": "Ordenar por número de orden",
+    "editIcon": "editar",
+    "deleteIcon": "eliminar"
+  },
+
+  "employee": {
+    "editTitle": "Editar empleado",
+    "newTitle": "Nuevo empleado",
+    "name": "Nombre",
+    "lastname": "Apellido",
+    "ocupation": "Ocupación",
+    "entryDate": "Fecha de ingreso",
+    "team": "Equipo",
+    "update": "Actualizar",
+    "add": "Agregar",
+    "cancel": "Cancelar"
+  },
+
+  "employeeTable": {
+    "id": "ID",
+    "name": "Nombre",
+    "lastname": "Apellido",
+    "ocupation": "Ocupación",
+    "entryDate": "Fecha de ingreso",
+    "team": "Equipo",
+    "actions": "Acciones",
+    "editIcon": "editar",
+    "deleteIcon": "eliminar"
+  },
+
+  "paginator": {
+    "itemsPerPage": "Elementos por página:",
+    "nextPage": "Página siguiente",
+    "previousPage": "Página anterior",
+    "firstPage": "Primera página",
+    "lastPage": "Última página",
+    "range": "{{start}} – {{end}} de {{length}}",
+    "rangeZero": "0 de {{length}}"
+  },
+
+  "months": {
+    "january": "Enero",
+    "february": "Febrero",
+    "march": "Marzo",
+    "april": "Abril",
+    "may": "Mayo",
+    "june": "Junio",
+    "july": "Julio",
+    "august": "Agosto",
+    "september": "Septiembre",
+    "october": "Octubre",
+    "november": "Noviembre",
+    "december": "Diciembre"
+  },
+
+  "performance": "Desempeño"
 }

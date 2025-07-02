@@ -1,67 +1,75 @@
 <div class="titulo-reporte">
-  <h2 class="center">Generate</h2>
+  <h2 class="center">{{ 'generate.title' | translate }}</h2>
 </div>
 
 <div class="volver">
-  <button type="button" (click)="goToReport()" class="btn-volver">Go back</button>
+  <button type="button" (click)="goToReport()" class="btn-volver">
+    {{ 'generate.goBack' | translate }}
+  </button>
 </div>
 
 <div class="contenedor-principal">
   <div class="reporte-mensual">
-    <h3><b>REPORT OF THE MONTH</b></h3>
+    <h3><b>{{ 'generate.monthlyReport' | translate }}</b></h3>
     <table>
       <tr>
-        <th> </th>
-        <th>Data</th>
+        <th></th>
+        <th>{{ 'generate.data' | translate }}</th>
       </tr>
       <tr>
-        <td>Average attendance</td>
+        <td>{{ 'generate.avgAttendance' | translate }}</td>
         <td><span class="tag">30%</span></td>
       </tr>
       <tr>
-        <td>Average tardiness</td>
+        <td>{{ 'generate.avgTardiness' | translate }}</td>
         <td><span class="tag">10%</span></td>
       </tr>
       <tr>
-        <td>Average hours worked per week</td>
+        <td>{{ 'generate.avgHoursWorked' | translate }}</td>
         <td><span class="tag">8hrs</span></td>
       </tr>
       <tr>
-        <td>Average number of personal permits requested</td>
+        <td>{{ 'generate.avgPermits' | translate }}</td>
         <td><span class="tag">4</span></td>
       </tr>
       <tr>
-        <td>Number of unjustified absences</td>
+        <td>{{ 'generate.unjustifiedAbsences' | translate }}</td>
         <td><span class="tag">40/60</span></td>
       </tr>
       <tr>
-        <td>Number of warnings recorded</td>
+        <td>{{ 'generate.warningsRecorded' | translate }}</td>
         <td><span class="tag">20</span></td>
       </tr>
       <tr>
-        <td>Average performance evaluation</td>
+        <td>{{ 'generate.avgPerformance' | translate }}</td>
         <td><span class="tag">30%</span></td>
       </tr>
       <tr>
-        <td>Average goal achievement</td>
+        <td>{{ 'generate.avgGoals' | translate }}</td>
         <td><span class="tag">10.6%</span></td>
       </tr>
       <tr>
-        <td>Average number of late tasks</td>
+        <td>{{ 'generate.avgLateTasks' | translate }}</td>
         <td><span class="tag">30%</span></td>
       </tr>
     </table>
   </div>
 
   <div class="grafico">
-    <h3>Registered Employees – 100</h3>
-    <p class="subtitulo">Low performance</p>
+    <h3>{{ 'generate.registeredEmployees' | translate:{ count: 100 } }}</h3>
+    <p class="subtitulo">{{ 'generate.lowPerformance' | translate }}</p>
     <div class="barras">
       <div class="barra">
-        <div class="barra-valor" style="height: 80%;"></div>
-        <span>PROXIMAMENTE</span>
+        <div class="barra-valor" style="height: 80%; width: 70%;"></div>
       </div>
-
+      <div class="grafico">
+        <canvas baseChart
+                [data]="barChartData"
+                [options]="barChartOptions"
+                style="max-width: 100%;">
+        </canvas>
+      </div>
     </div>
   </div>
+
 </div>
