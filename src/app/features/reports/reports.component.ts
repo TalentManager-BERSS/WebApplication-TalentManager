@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -14,8 +15,11 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { AuthService } from '../../core/auth.service';
+import { ConfirmDialogComponent } from '../../core/confirm-dialog.component';
 import { CurrencyService } from '../../core/currency.service';
 import { findCurrency } from '../../core/currency-catalog';
+import { monthLong, monthShort as monthShortName } from '../../core/date-format';
+import { I18nService } from '../../core/i18n.service';
 import { DailySummary, Employee, MonthlyAggregate, Report, ReportDraft } from '../../core/models';
 import { TalentApiService } from '../../core/talent-api.service';
 
@@ -37,6 +41,7 @@ import { TalentApiService } from '../../core/talent-api.service';
     MatProgressBarModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatDialogModule,
     TranslatePipe,
     RouterLink
   ],
@@ -48,7 +53,9 @@ export class ReportsComponent implements OnInit {
   private readonly api = inject(TalentApiService);
   private readonly auth = inject(AuthService);
   private readonly snack = inject(MatSnackBar);
+  private readonly dialog = inject(MatDialog);
   private readonly currencyService = inject(CurrencyService);
+  private readonly i18n = inject(I18nService);
 
   readonly currency = this.currencyService.code;
   readonly currencySymbol = computed(() => findCurrency(this.currency())?.symbol ?? this.currency());
@@ -119,6 +126,9 @@ export class ReportsComponent implements OnInit {
   });
 
   readonly companyId = this.auth.companyId() ?? 1;
+
+  /** Caps the workday datepicker — a workday can't be logged in the future. */
+  readonly maxDate = new Date();
 
   readonly reportForm = this.fb.nonNullable.group({
     title: ['', [Validators.required, Validators.minLength(4)]],
@@ -196,11 +206,11 @@ export class ReportsComponent implements OnInit {
         this.loadReports();
         this.ensureAggregateSelection();
         this.saving.set(false);
-        this.snack.open('Informe creado', 'OK', { duration: 2400 });
+        this.snack.open(this.i18n.t('reports.toastCreated'), 'OK', { duration: 2400, panelClass: 'snack-success' });
       },
       error: () => {
         this.saving.set(false);
-        this.snack.open('No pudimos crear el informe', 'OK', { duration: 3000 });
+        this.snack.open(this.i18n.t('reports.toastCreateError'), 'OK', { duration: 3000 });
       }
     });
   }
@@ -233,7 +243,7 @@ export class ReportsComponent implements OnInit {
     const exit = this.parseTimeToHours(values.exitTime);
     if (entry === null || exit === null) return;
     if (exit <= entry) {
-      this.snack.open('La hora de salida debe ser mayor que la de entrada', 'OK', { duration: 3000 });
+      this.snack.open(this.i18n.t('reports.exitAfterEntry'), 'OK', { duration: 3000 });
       return;
     }
 
@@ -271,9 +281,10 @@ export class ReportsComponent implements OnInit {
           : [summary, ...this.dailySummaries()]
         );
 
+        const hours = this.formatHours(exit - entry);
         if (existing) {
           this.dailyForm.patchValue({ inputAmount: null }, { emitEvent: false });
-          this.snack.open(`Registro actualizado · ${this.formatHours(exit - entry)} h`, 'OK', { duration: 2400 });
+          this.snack.open(this.i18n.t('reports.toastRecordUpdated', { hours }), 'OK', { duration: 2400, panelClass: 'snack-success' });
         } else {
           // Advance date by one day so the duplicate-detection banner doesn't
           // appear on the record we just created (and to streamline catch-up logging).
@@ -281,15 +292,15 @@ export class ReportsComponent implements OnInit {
           nextDate.setDate(nextDate.getDate() + 1);
           this.dailyForm.patchValue({ inputAmount: null, date: nextDate }, { emitEvent: false });
           this.dailyContextTrigger.update(value => value + 1);
-          const incomeMsg = summary.inputAmount > 0
-            ? ` · ${this.formatCurrencyShort(summary.inputAmount)}`
-            : '';
-          this.snack.open(`Registro guardado · ${this.formatHours(exit - entry)} h${incomeMsg}`, 'OK', { duration: 2600 });
+          const message = summary.inputAmount > 0
+            ? this.i18n.t('reports.toastRecordSavedIncome', { hours, income: this.formatCurrencyShort(summary.inputAmount) })
+            : this.i18n.t('reports.toastRecordSaved', { hours });
+          this.snack.open(message, 'OK', { duration: 2600, panelClass: 'snack-success' });
         }
         this.loadAggregates();
       },
       error: error => {
-        const message = error?.error?.message ?? 'No pudimos guardar el registro';
+        const message = error?.error?.message ?? this.i18n.t('reports.saveRecordError');
         this.snack.open(message, 'OK', { duration: 3000 });
       }
     });
@@ -304,9 +315,24 @@ export class ReportsComponent implements OnInit {
   }
 
   deleteReport(report: Report) {
-    this.api.deleteReport(report.id).subscribe(() => {
-      this.loadReports();
-      this.snack.open('Informe eliminado', 'OK', { duration: 2400 });
+    const ref = this.dialog.open(ConfirmDialogComponent, {
+      panelClass: 'app-dialog-panel',
+      width: '420px',
+      data: {
+        title: this.i18n.t('reports.deleteConfirmTitle'),
+        message: this.i18n.t('reports.deleteConfirmText', { title: report.title }),
+        confirmLabel: this.i18n.t('common.confirmDelete'),
+        cancelLabel: this.i18n.t('common.cancel'),
+        danger: true
+      }
+    });
+
+    ref.afterClosed().subscribe(confirmed => {
+      if (!confirmed) return;
+      this.api.deleteReport(report.id).subscribe(() => {
+        this.loadReports();
+        this.snack.open(this.i18n.t('reports.toastDeleted'), 'OK', { duration: 2400 });
+      });
     });
   }
 
@@ -324,15 +350,15 @@ export class ReportsComponent implements OnInit {
 
   employeeName(employeeId: number) {
     const employee = this.employees().find(item => item.id === employeeId);
-    return employee ? this.employeeFullName(employee) : `Empleado #${employeeId}`;
+    return employee ? this.employeeFullName(employee) : this.i18n.t('reports.employeeFallback', { id: employeeId });
   }
 
   monthName(month: number) {
-    return ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'][month - 1] ?? `${month}`;
+    return monthLong(month, this.i18n.language());
   }
 
   monthShort(month: number) {
-    return ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'][month - 1] ?? `${month}`;
+    return monthShortName(month, this.i18n.language());
   }
 
   dailyDate(summary: DailySummary) {
@@ -431,7 +457,11 @@ export class ReportsComponent implements OnInit {
 
     const titleControl = this.reportForm.controls.title;
     const contentControl = this.reportForm.controls.content;
-    const generatedTitle = `Decisión ${this.monthName(aggregate.month)} ${aggregate.year} - ${aggregate.employeeName}`;
+    const generatedTitle = this.i18n.t('reports.narrative.titleAuto', {
+      month: this.monthName(aggregate.month),
+      year: aggregate.year,
+      name: aggregate.employeeName
+    });
     const narrative = this.buildNarrative(aggregate);
 
     const currentTitle = titleControl.value?.trim() ?? '';
@@ -454,32 +484,34 @@ export class ReportsComponent implements OnInit {
     const totalHours = aggregate.totalHours;
     const days = aggregate.dayCount;
     const input = this.formatCurrencyShort(aggregate.totalInput);
-    const performanceTone = this.tone(aggregate);
+    const month = this.monthName(aggregate.month);
+    const name = aggregate.employeeName;
+    const team = aggregate.teamName;
 
     if (aggregate.completionRate > 100) {
       const excessHours = this.formatHours(Math.max(0, aggregate.completedHours - aggregate.totalHours));
       return [
-        `Durante ${this.monthName(aggregate.month)} ${aggregate.year}, ${aggregate.employeeName} (${aggregate.teamName}) superó el 100% de las horas planificadas: registró ${hours} h frente a ${totalHours} h esperadas, con ${excessHours} h adicionales y un score promedio de ${score}/10.`,
-        `Su aporte económico medido fue de ${input}. Este escenario puede indicar compromiso sobresaliente, pero también riesgo de sobrecarga si se repite sin planificación.`,
-        'Decisión sugerida: reconocer el esfuerzo y evaluar una compensación concreta, como bono, pago de horas extra o descanso compensatorio. También conviene revisar la planificación del mes siguiente para evitar que el sobrecumplimiento dependa de carga no sostenible.'
+        this.i18n.t('reports.narrative.overP1', { month, year: aggregate.year, name, team, hours, totalHours, excessHours, score }),
+        this.i18n.t('reports.narrative.overP2', { input }),
+        this.i18n.t('reports.narrative.overP3')
       ].join('\n\n');
     }
 
     return [
-      `Durante ${this.monthName(aggregate.month)} ${aggregate.year}, ${aggregate.employeeName} (${aggregate.teamName}) cumplió el ${completion}% de las horas planificadas (${hours} h sobre ${totalHours} h) con un score promedio de ${score}/10 a lo largo de ${days} jornada(s) registradas.`,
-      `Su aporte económico medido fue de ${input}. ${performanceTone}`,
-      'Decisión sugerida: usa estos datos para definir reconocimiento, coaching o seguimiento concreto en la próxima conversación 1:1.'
+      this.i18n.t('reports.narrative.normP1', { month, year: aggregate.year, name, team, completion, hours, totalHours, score, days }),
+      this.i18n.t('reports.narrative.normP2', { input, tone: this.tone(aggregate) }),
+      this.i18n.t('reports.narrative.normP3')
     ].join('\n\n');
   }
 
   private tone(aggregate: MonthlyAggregate): string {
     const completion = aggregate.completionRate;
     const score = aggregate.averageScore;
-    if (completion > 100) return 'El desempeño supera lo planificado; debe reconocerse, compensarse y revisarse la carga para que no se vuelva insostenible.';
-    if (completion >= 90 && score >= 8.5) return 'El desempeño es destacado: alto cumplimiento y calidad sostenida.';
-    if (completion >= 75 && score >= 7) return 'El desempeño se mantiene saludable, con margen de mejora puntual.';
-    if (completion < 60 || score < 6) return 'Se observa riesgo: el cumplimiento o la calidad están bajo el umbral esperado.';
-    return 'El desempeño es estable; conviene reforzar foco en métricas específicas para subir el siguiente nivel.';
+    if (completion > 100) return this.i18n.t('reports.narrative.toneOver');
+    if (completion >= 90 && score >= 8.5) return this.i18n.t('reports.narrative.toneStrong');
+    if (completion >= 75 && score >= 7) return this.i18n.t('reports.narrative.toneHealthy');
+    if (completion < 60 || score < 6) return this.i18n.t('reports.narrative.toneRisk');
+    return this.i18n.t('reports.narrative.toneStable');
   }
 
   private dailyTime(summary: DailySummary) {

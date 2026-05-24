@@ -93,7 +93,7 @@ export class ProfileComponent implements OnInit {
         this.showCurrent.set(false);
         this.showNew.set(false);
         this.showConfirm.set(false);
-        this.snack.open(this.translate.instant('profile.passwordUpdated'), 'OK', { duration: 2400 });
+        this.snack.open(this.translate.instant('profile.passwordUpdated'), 'OK', { duration: 2400, panelClass: 'snack-success' });
       },
       error: () => {
         this.saving.set(false);

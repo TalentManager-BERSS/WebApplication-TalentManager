@@ -82,9 +82,9 @@ export class AuthPageComponent {
     this.auth.signIn(username, password).subscribe({
       next: () => this.router.navigate(['/app/dashboard']),
       error: (response) => {
-        this.error.set(response?.status === 0
-          ? 'No se pudo conectar con el backend local. Verifica que esté corriendo en el puerto 8080.'
-          : 'Credenciales inválidas. Prueba el usuario demo o registra una empresa.');
+        this.error.set(this.i18n.t(response?.status === 0
+          ? 'auth.errorBackend'
+          : 'auth.errorCredentials'));
         this.loading.set(false);
       }
     });
@@ -104,12 +104,12 @@ export class AuthPageComponent {
       next: () => this.auth.signIn(payload.username, payload.password).subscribe({
         next: () => this.router.navigate(['/app/dashboard']),
         error: () => {
-          this.error.set('La empresa fue creada, pero no pudimos iniciar sesión automáticamente.');
+          this.error.set(this.i18n.t('auth.errorAutoLogin'));
           this.loading.set(false);
         }
       }),
       error: () => {
-        this.error.set('No se pudo registrar. Revisa los datos o usa otro correo.');
+        this.error.set(this.i18n.t('auth.errorRegister'));
         this.loading.set(false);
       }
     });

@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons+Round');
 
 :root {
-  --font-body: 'Source Sans 3', 'Segoe UI', Arial, sans-serif;
-  --font-heading: 'IBM Plex Sans', 'Source Sans 3', 'Segoe UI', Arial, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', Arial, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', Arial, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'Consolas', monospace;
 
   /* Surface */
@@ -95,12 +95,12 @@
 html[data-theme='dark'] {
   color-scheme: dark;
 
-  --surface-app: #0b1110;
-  --surface-card: #111a18;
-  --surface-soft: #151f1d;
-  --surface-muted: #1b2824;
-  --surface-elevated: #17211f;
-  --surface-overlay: rgba(17, 26, 24, 0.72);
+  --surface-app: #070b0a;
+  --surface-card: #0f1715;
+  --surface-soft: #131d1a;
+  --surface-muted: #1c2824;
+  --surface-elevated: #18221f;
+  --surface-overlay: rgba(15, 23, 21, 0.80);
 
   --brand-900: #e6fbf5;
   --brand-800: #d5f5ed;
@@ -127,19 +127,19 @@ html[data-theme='dark'] {
   --danger: #ff8d73;
   --danger-soft: #3a1d17;
 
-  --ink-900: #f4fbf8;
-  --ink-800: #e8f1ee;
-  --ink-700: #d5e2de;
-  --ink-600: #b8c8c3;
-  --ink-500: #9dafaa;
-  --ink-400: #82938e;
-  --ink-300: #667773;
-  --ink-200: #435550;
-  --ink-100: #2b3d38;
+  --ink-900: #f4f8f6;
+  --ink-800: #e6edea;
+  --ink-700: #d2dcd8;
+  --ink-600: #b4c0bb;
+  --ink-500: #97a39e;
+  --ink-400: #7c8884;
+  --ink-300: #617069;
+  --ink-200: #3f4d48;
+  --ink-100: #283431;
 
-  --line-soft: #22352f;
-  --line: #2b403a;
-  --line-strong: #3b554d;
+  --line-soft: #1f2d29;
+  --line: #29372f;
+  --line-strong: #3a4c45;
 
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.28);
   --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.22);
@@ -276,6 +276,11 @@ select:focus-visible,
   background: var(--surface-card) !important;
 }
 
+/* Brand-colored caret instead of the prebuilt theme's blue */
+.mat-mdc-input-element {
+  caret-color: var(--brand-500) !important;
+}
+
 .mat-mdc-form-field,
 .mat-mdc-select-value,
 .mat-mdc-select-arrow,
@@ -320,36 +325,64 @@ select:focus-visible,
 .mat-mdc-select-panel {
   background: var(--surface-card) !important;
   border: 1px solid var(--line-soft) !important;
-  padding: 4px !important;
-  box-shadow: var(--shadow-md) !important;
+  padding: 5px !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-radius: var(--radius-lg) !important;
 }
 
 .mat-mdc-autocomplete-panel,
 .mat-mdc-menu-panel {
   background: var(--surface-card) !important;
   border: 1px solid var(--line-soft) !important;
-  box-shadow: var(--shadow-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* Select trigger: subtle, refined value + arrow */
+.mat-mdc-select-value {
+  color: var(--ink-800) !important;
+  font-weight: 500;
+}
+
+.mat-mdc-select-placeholder {
+  color: var(--ink-400) !important;
+}
+
+.mat-mdc-select-arrow {
+  color: var(--ink-400) !important;
+  transition: color 160ms var(--ease-out);
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-select-arrow {
+  color: var(--brand-500) !important;
 }
 
 .mat-mdc-option {
   border-radius: var(--radius-sm) !important;
   margin: 1px 0 !important;
-  min-height: 42px !important;
+  min-height: 44px !important;
   color: var(--ink-700) !important;
-  transition: background 140ms var(--ease-out), color 140ms var(--ease-out);
+  transition: background 140ms var(--ease-out), color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 }
 
-.mat-mdc-option:hover {
+.mat-mdc-option:hover:not(.mdc-list-item--disabled),
+.mat-mdc-option.mat-mdc-option-active {
   background: var(--surface-soft) !important;
 }
 
-.mat-mdc-option.mdc-list-item--selected {
+.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple) {
   background: var(--brand-50) !important;
   color: var(--brand-700) !important;
+  font-weight: 600 !important;
+  box-shadow: inset 3px 0 0 var(--brand-500);
 }
 
 .mat-mdc-option .mdc-list-item__primary-text {
   color: inherit !important;
+}
+
+/* Hide the default MDC selected-tick pseudo so our accent bar reads cleanly */
+.mat-mdc-option .mat-pseudo-checkbox-minimal {
+  display: none !important;
 }
 
 .mat-datepicker-content {
@@ -396,13 +429,16 @@ html[data-theme='dark'] .mat-calendar-next-button {
   color: var(--ink-700) !important;
 }
 
-html[data-theme='dark'] .mat-mdc-option:hover {
+html[data-theme='dark'] .mat-mdc-option:hover:not(.mdc-list-item--disabled),
+html[data-theme='dark'] .mat-mdc-option.mat-mdc-option-active {
   background: var(--surface-muted) !important;
 }
 
-html[data-theme='dark'] .mat-mdc-option.mdc-list-item--selected {
-  background: rgba(143, 211, 202, 0.12) !important;
+html[data-theme='dark'] .mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple) {
+  background: rgba(143, 211, 202, 0.14) !important;
   color: var(--brand-700) !important;
+  font-weight: 600 !important;
+  box-shadow: inset 3px 0 0 var(--brand-500);
 }
 
 /* ---- Currency picker ---- */
@@ -552,6 +588,13 @@ html[data-theme='dark'] .mat-mdc-option.mdc-list-item--selected {
   border-width: 1.5px !important;
 }
 
+/* Hover feedback on idle fields — a subtle cue before focus */
+.mat-mdc-form-field:not(.mat-focused):hover .mdc-notched-outline__leading,
+.mat-mdc-form-field:not(.mat-focused):hover .mdc-notched-outline__trailing,
+.mat-mdc-form-field:not(.mat-focused):hover .mdc-notched-outline__notch {
+  border-color: var(--line-strong) !important;
+}
+
 /* Buttons */
 .mat-mdc-raised-button,
 .mat-mdc-unelevated-button,
@@ -595,6 +638,37 @@ html[data-theme='dark'] .mat-mdc-option.mdc-list-item--selected {
   box-shadow: none !important;
 }
 
+/* Dark mode inverts the brand scale (brand-600 becomes a light mint), so the
+   primary button needs dark text on a mint fill instead of white-on-light. */
+html[data-theme='dark'] .mat-mdc-unelevated-button.mat-primary {
+  background: var(--brand-500) !important;
+  color: #07140f !important;
+}
+
+html[data-theme='dark'] .mat-mdc-unelevated-button.mat-primary:hover:not([disabled]) {
+  background: var(--brand-400) !important;
+  color: #07140f !important;
+}
+
+html[data-theme='dark'] .mat-mdc-unelevated-button.mat-primary[disabled] {
+  background: var(--ink-200) !important;
+  color: var(--ink-400) !important;
+}
+
+/* Secondary buttons get consistent hover feedback too */
+.mat-mdc-outlined-button:hover:not([disabled]),
+.mat-mdc-button:hover:not([disabled]) {
+  background: var(--surface-muted) !important;
+}
+
+.mat-mdc-outlined-button {
+  border-color: var(--line) !important;
+}
+
+.mat-mdc-outlined-button:hover:not([disabled]) {
+  border-color: var(--line-strong) !important;
+}
+
 .mat-mdc-icon-button {
   transition: background 160ms var(--ease-out), color 160ms var(--ease-out) !important;
 }
@@ -622,6 +696,15 @@ html[data-theme='dark'] .mat-mdc-option.mdc-list-item--selected {
 
 .mat-mdc-snack-bar-container .mdc-button__label {
   color: var(--accent-500) !important;
+}
+
+/* Success toast: a calm green accent that reads as confirmation */
+.snack-success .mdc-snackbar__surface {
+  border-left: 3px solid var(--success) !important;
+}
+
+.snack-success .mdc-button__label {
+  color: var(--brand-300) !important;
 }
 
 /* Tooltips */

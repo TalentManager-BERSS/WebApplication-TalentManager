@@ -1,6 +1,5 @@
 <section class="page-header">
   <div>
-    <p class="eyebrow">{{ 'employees.eyebrow' | translate }}</p>
     <h1>{{ 'employees.title' | translate }}</h1>
     <p class="lead">{{ 'employees.lead' | translate }}</p>
   </div>
@@ -58,13 +57,15 @@
 
       <mat-form-field appearance="outline">
         <mat-label>{{ 'employees.startDate' | translate }}</mat-label>
-        <input matInput type="date" formControlName="registrationDate">
+        <input matInput [matDatepicker]="hireDate" [max]="maxDate" formControlName="registrationDate">
+        <mat-datepicker-toggle matIconSuffix [for]="hireDate"></mat-datepicker-toggle>
+        <mat-datepicker #hireDate></mat-datepicker>
         <mat-error *ngIf="form.controls.registrationDate.invalid">{{ 'employees.selectDate' | translate }}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>{{ 'employees.team' | translate }}</mat-label>
-        <input matInput formControlName="teamName" placeholder="TI, QA, HR...">
+        <input matInput formControlName="teamName" [placeholder]="'employees.teamPlaceholder' | translate">
         <mat-error *ngIf="form.controls.teamName.invalid">{{ 'employees.minTwo' | translate }}</mat-error>
       </mat-form-field>
 
@@ -164,7 +165,7 @@
           <td class="muted">
             <span class="cell-date">
               <mat-icon>event</mat-icon>
-              {{ employee.registrationDate | date:'mediumDate' }}
+              {{ employee.registrationDate | date:'mediumDate':'UTC' }}
             </span>
           </td>
           <td class="row-actions">

@@ -60,16 +60,9 @@
 
 .brand__text strong {
   font-family: var(--font-heading);
-  font-size: 1.04rem;
+  font-size: 1.18rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.brand__text small {
-  margin-top: 3px;
-  color: var(--ink-400);
-  font-size: 0.74rem;
-  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 /* Nav */
@@ -366,14 +359,6 @@ html[data-theme='dark'] .account__avatar {
 
 .topbar__title {
   min-width: 0;
-}
-
-.topbar__sub {
-  margin: 0 0 2px;
-  color: var(--ink-400);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
 }
 
 .topbar__title h1 {

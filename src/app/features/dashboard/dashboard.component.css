@@ -853,7 +853,12 @@
 }
 
 .support-note mat-icon {
-  margin-top: 2px;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  font-size: 22px;
+  line-height: 22px;
+  margin-top: 1px;
 }
 
 .support-note strong {

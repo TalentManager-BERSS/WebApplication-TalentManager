@@ -1,7 +1,9 @@
 {
+  "common": {
+    "cancel": "Cancel",
+    "confirmDelete": "Yes, delete"
+  },
   "shell": {
-    "brandTagline": "Talent management",
-    "operation": "Operation",
     "activeSession": "Active session",
     "theme": "Switch theme",
     "language": "Switch language",
@@ -12,7 +14,8 @@
     "searchPlaceholder": "Search employees, teams, tickets...",
     "signOut": "Sign out",
     "support": "Support",
-    "openProfile": "Open profile"
+    "openProfile": "Open profile",
+    "mainNav": "Main navigation"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -29,7 +32,6 @@
     "profileHint": "Account and password"
   },
   "auth": {
-    "eyebrow": "Platform for managers",
     "title": "Your team, your metrics, one screen.",
     "lead": "TalentManager brings employees, hours, performance and blockers into one clear space. Make faster decisions with real data.",
     "employeesTitle": "Employees and teams",
@@ -61,10 +63,16 @@
     "createWorkspace": "Create space",
     "creating": "Creating...",
     "hasAccount": "Already have an account?",
-    "loginLink": "Sign in"
+    "loginLink": "Sign in",
+    "errorBackend": "Couldn't reach the server. Make sure the backend is running on port 8080.",
+    "errorCredentials": "Invalid credentials. Try the demo account or register a company.",
+    "errorRegister": "We couldn't complete the registration. Check the data or use another email.",
+    "errorAutoLogin": "The company was created, but we couldn't sign you in automatically. Please sign in manually.",
+    "required": "This field is required.",
+    "invalidEmail": "Enter a valid email address.",
+    "passwordMin": "The password must be at least 8 characters."
   },
   "dashboard": {
-    "eyebrow": "Command center",
     "title": "Your company pulse, in real time.",
     "lead": "A view of talent health: how many people you have, how their hours are going, how much they generate and where to focus this week.",
     "health": "Workspace status",
@@ -78,8 +86,34 @@
     "scoreHint": "Team evaluation average",
     "completion": "Completion",
     "completionHint": "{{done}} of {{total}} expected hours",
+    "healthStatus": {
+      "HEALTHY": "Healthy",
+      "WATCH": "Under watch",
+      "ATTENTION": "Needs attention"
+    },
+    "insight": {
+      "REGISTER_EMPLOYEES": "Add employees to start measuring performance by team.",
+      "NO_DAILY_RECORDS": "No daily records yet; capture workdays to activate automatic monthly analytics.",
+      "STRONG_COMPLETION": "Operational completion is strong; document which teams sustain that pace.",
+      "LOW_COMPLETION": "Completion is below target; review capacity, assigned hours and blockers.",
+      "LOW_SCORE": "The average score suggests performance risk; prioritize feedback and follow-up.",
+      "OPEN_SUPPORT": "There are open support requests that may affect operations.",
+      "STABLE": "The business is stable; the next step is to compare trends month over month."
+    },
+    "trendInsight": {
+      "needMore": "Record more workdays to compare the evolution across months.",
+      "moreRevenueLessHours": "Last month generated more income with equal or lower workload.",
+      "revenueUp": "Income rose; check whether the increase came with more hours.",
+      "hoursUpNoRevenue": "Hours grew without raising income; review productivity or blockers.",
+      "stable": "The trend is stable; use reports to explain changes per person."
+    },
+    "chartIncome": "Income ({{currency}})",
+    "chartHours": "People-hours",
+    "chartRevenue": "Revenue",
+    "chartCost": "Cost",
+    "chartMargin": "Margin",
     "trend": "Trend",
-    "trendTitle": "Income and people-hours - last 6 months",
+    "trendTitle": "Income and people-hours · last 6 months",
     "trendHelp": "This series answers a simple question: how many hours were invested and how much income was recorded each month.",
     "incomeLegend": "Recorded income",
     "hoursLegend": "Worked hours",
@@ -103,8 +137,8 @@
     "contributorsTitle": "Revenue, cost and margin per person",
     "contributorsHelp": "Top 5 employees by billed revenue across the last 6 months. Margin is revenue minus cost (the company default applies when an employee has no individual rate).",
     "contributorsEmptyTitle": "No rates configured",
-    "contributorsEmptyText": "Once you set hourly rate and hourly cost in Settings or per employee, this panel will show real profitability.",
-    "goSettings": "Go to Settings",
+    "contributorsEmptyText": "Once you set hourly rate and hourly cost in Configuration or per employee, this panel will show real profitability.",
+    "goSettings": "Go to Configuration",
     "totalRevenue": "Total revenue",
     "totalCost": "Total cost",
     "totalMargin": "Total margin",
@@ -118,7 +152,6 @@
     "targetExplained": "Target is {{hours}} h per month (configurable in Configuration)."
   },
   "reports": {
-    "eyebrow": "Operational intelligence",
     "title": "Executive reports",
     "lead": "Reports does not create employees or invent data: it turns a person's daily log into an automatic monthly closing and then into an editable executive decision.",
     "dailyRecords": "Daily records",
@@ -171,10 +204,37 @@
     "days": "day(s)",
     "deleteReport": "Delete report",
     "noReports": "No reports",
-    "noReportsText": "There are no saved reports yet. Create one from the form to start the history."
+    "noReportsText": "There are no saved reports yet. Create one from the form to start the history.",
+    "deleteConfirmTitle": "Delete report?",
+    "deleteConfirmText": "«{{title}}» will be removed from the history. This action can't be undone.",
+    "toastCreated": "Report created",
+    "toastCreateError": "We couldn't create the report",
+    "toastDeleted": "Report deleted",
+    "toastRecordSaved": "Record saved · {{hours}} h",
+    "toastRecordSavedIncome": "Record saved · {{hours}} h · {{income}}",
+    "toastRecordUpdated": "Record updated · {{hours}} h",
+    "exitAfterEntry": "The exit time must be later than the entry time.",
+    "saveRecordError": "We couldn't save the record.",
+    "employeeFallback": "Employee #{{id}}",
+    "hoursWord": "hours",
+    "incomeAutoHint": "If left empty, the hourly rate will be used:",
+    "incomeNoRateHint": "Set the employee's hourly rate in Configuration to autofill.",
+    "narrative": {
+      "titleAuto": "{{month}} {{year}} decision — {{name}}",
+      "overP1": "During {{month}} {{year}}, {{name}} ({{team}}) exceeded 100% of the planned hours: logged {{hours}} h against {{totalHours}} h expected, with {{excessHours}} extra hours and an average score of {{score}}/10.",
+      "overP2": "Their measured economic contribution was {{input}}. This scenario can signal outstanding commitment, but also a risk of overload if it repeats without planning.",
+      "overP3": "Suggested decision: recognize the effort and consider concrete compensation, such as a bonus, overtime pay or compensatory time off. It is also worth reviewing next month's plan so over-completion does not rely on an unsustainable workload.",
+      "normP1": "During {{month}} {{year}}, {{name}} ({{team}}) met {{completion}}% of the planned hours ({{hours}} h out of {{totalHours}} h) with an average score of {{score}}/10 across {{days}} recorded workday(s).",
+      "normP2": "Their measured economic contribution was {{input}}. {{tone}}",
+      "normP3": "Suggested decision: use this data to define recognition, coaching or concrete follow-up in the next 1:1 conversation.",
+      "toneOver": "Performance exceeds the plan; it should be recognized, compensated and the workload reviewed so it does not become unsustainable.",
+      "toneStrong": "Performance is outstanding: high completion and sustained quality.",
+      "toneHealthy": "Performance stays healthy, with room for targeted improvement.",
+      "toneRisk": "Risk detected: completion or quality is below the expected threshold.",
+      "toneStable": "Performance is stable; reinforce focus on specific metrics to reach the next level."
+    }
   },
   "support": {
-    "eyebrow": "Internal support",
     "title": "Team blockers and requests",
     "lead": "Each ticket follows a clear flow: pending, in progress and resolved. Use this queue to remove blockers that affect hours, completion and reports.",
     "inboxOk": "Inbox clean",
@@ -208,10 +268,18 @@
     "all": "All",
     "statusPending": "Pending",
     "statusInProgress": "In progress",
-    "statusResolved": "Resolved"
+    "statusResolved": "Resolved",
+    "deleteTicket": "Delete ticket",
+    "deleteConfirmTitle": "Delete ticket?",
+    "deleteConfirmText": "This ticket will be permanently removed from the queue. This action can't be undone.",
+    "toastCreated": "Request created",
+    "toastCreateError": "We couldn't create the request",
+    "toastStatusChanged": "Ticket {{status}}",
+    "toastStatusError": "We couldn't change the ticket status",
+    "toastDeleted": "Ticket removed",
+    "toastDeleteError": "We couldn't remove the ticket"
   },
   "employees": {
-    "eyebrow": "Directory",
     "title": "Employees and teams",
     "lead": "Create the people in your company, assign them to a team and keep the directory up to date. Everything else is built on this list.",
     "people": "people",
@@ -231,6 +299,7 @@
     "startDate": "Start date",
     "selectDate": "Select a date.",
     "team": "Team",
+    "teamPlaceholder": "IT, QA, HR...",
     "saving": "Saving...",
     "saveChanges": "Save changes",
     "addEmployee": "Add employee",
@@ -258,10 +327,16 @@
     "compensation": "Compensation",
     "compensationHelp": "If left at 0, the company default is applied.",
     "monthlyRate": "Monthly rate",
-    "monthlyCost": "Monthly cost"
+    "monthlyCost": "Monthly cost",
+    "deleteConfirmTitle": "Delete employee?",
+    "deleteConfirmText": "You're about to permanently remove {{name}}. This action can't be undone.",
+    "toastCreated": "Employee added",
+    "toastUpdated": "Employee updated",
+    "toastDeleted": "Employee removed",
+    "saveError": "Could not save the employee. Check the data and try again.",
+    "loadError": "We couldn't load this company's employees."
   },
   "settings": {
-    "eyebrow": "Configuration",
     "title": "Company configuration",
     "lead": "Define how your company operates: expected hours that drive the completion target, the currency used for KPIs, and the per-hour rates that feed revenue, cost and margin automatically.",
     "operationsTitle": "Calendar and currency",
@@ -296,7 +371,6 @@
     "noBilling": "No active rates: the dashboard will show 0 until you define them."
   },
   "profile": {
-    "eyebrow": "My account",
     "title": "User profile",
     "lead": "Account info and security options. Change your password without losing the session.",
     "accountTitle": "Account details",
