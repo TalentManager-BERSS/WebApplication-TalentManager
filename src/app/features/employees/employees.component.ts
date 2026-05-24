@@ -2,6 +2,9 @@ import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -9,6 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AuthService } from '../../core/auth.service';
+import { ConfirmDialogComponent } from '../../core/confirm-dialog.component';
+import { I18nService } from '../../core/i18n.service';
 import { Employee, EmployeeDraft } from '../../core/models';
 import { TalentApiService } from '../../core/talent-api.service';
 
@@ -26,6 +31,9 @@ import { TalentApiService } from '../../core/talent-api.service';
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     TranslatePipe
   ],
   templateUrl: './employees.component.html',
@@ -36,6 +44,8 @@ export class EmployeesComponent implements OnInit {
   private readonly api = inject(TalentApiService);
   private readonly auth = inject(AuthService);
   private readonly snack = inject(MatSnackBar);
+  private readonly dialog = inject(MatDialog);
+  private readonly i18n = inject(I18nService);
 
   readonly employees = signal<Employee[]>([]);
   readonly editing = signal<Employee | null>(null);
@@ -67,11 +77,14 @@ export class EmployeesComponent implements OnInit {
   });
   readonly companyId = this.auth.companyId() ?? 1;
 
+  /** Today caps the hire-date picker — the backend rejects future dates. */
+  readonly maxDate = new Date();
+
   private readonly defaultFormValue = () => ({
     firstName: '',
     lastName: '',
     occupation: '',
-    registrationDate: new Date().toISOString().slice(0, 10),
+    registrationDate: new Date() as Date,
     teamName: ''
   });
 
@@ -79,9 +92,22 @@ export class EmployeesComponent implements OnInit {
     firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     occupation: ['', [Validators.required, Validators.maxLength(80)]],
-    registrationDate: [new Date().toISOString().slice(0, 10), [Validators.required]],
+    registrationDate: [new Date() as Date, [Validators.required]],
     teamName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]]
   });
+
+  /** Format a Date (from the picker) as local 'yyyy-MM-dd' for the backend LocalDate. */
+  private toIsoDate(value: Date | string): string {
+    const d = value instanceof Date ? value : new Date(value);
+    const pad = (n: number) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  }
+
+  /** Parse a 'yyyy-MM-dd' string into a local Date (avoids the UTC off-by-one). */
+  private fromIsoDate(value: string): Date {
+    const [y, m, d] = value.split('-').map(Number);
+    return new Date(y, (m || 1) - 1, d || 1);
+  }
 
   ngOnInit() {
     this.loadEmployees();
@@ -100,7 +126,7 @@ export class EmployeesComponent implements OnInit {
       firstName: values.firstName.trim(),
       lastName: values.lastName.trim(),
       occupation: values.occupation.trim(),
-      registrationDate: values.registrationDate,
+      registrationDate: this.toIsoDate(values.registrationDate),
       teamName: values.teamName.trim(),
       companyId: this.companyId
     };
@@ -111,14 +137,14 @@ export class EmployeesComponent implements OnInit {
 
     request.subscribe({
       next: () => {
-        const message = current ? 'Empleado actualizado' : 'Empleado agregado';
+        const message = this.i18n.t(current ? 'employees.toastUpdated' : 'employees.toastCreated');
         this.resetForm();
         this.loadEmployees();
         this.saving.set(false);
         this.snack.open(message, 'OK', { duration: 2400, panelClass: 'snack-success' });
       },
       error: (response) => {
-        this.error.set(response?.error?.message ?? 'No se pudo guardar el empleado. Revisa los datos e intenta otra vez.');
+        this.error.set(response?.error?.message ?? this.i18n.t('employees.saveError'));
         this.saving.set(false);
       }
     });
@@ -131,15 +157,30 @@ export class EmployeesComponent implements OnInit {
       firstName: employee.firstName,
       lastName: employee.lastName,
       occupation: employee.occupation,
-      registrationDate: employee.registrationDate,
+      registrationDate: this.fromIsoDate(employee.registrationDate),
       teamName: employee.teamName
     });
   }
 
   remove(employee: Employee) {
-    this.api.deleteEmployee(employee.id).subscribe(() => {
-      this.loadEmployees();
-      this.snack.open('Empleado eliminado', 'OK', { duration: 2400 });
+    const ref = this.dialog.open(ConfirmDialogComponent, {
+      panelClass: 'app-dialog-panel',
+      width: '420px',
+      data: {
+        title: this.i18n.t('employees.deleteConfirmTitle'),
+        message: this.i18n.t('employees.deleteConfirmText', { name: this.fullName(employee) }),
+        confirmLabel: this.i18n.t('common.confirmDelete'),
+        cancelLabel: this.i18n.t('common.cancel'),
+        danger: true
+      }
+    });
+
+    ref.afterClosed().subscribe(confirmed => {
+      if (!confirmed) return;
+      this.api.deleteEmployee(employee.id).subscribe(() => {
+        this.loadEmployees();
+        this.snack.open(this.i18n.t('employees.toastDeleted'), 'OK', { duration: 2400 });
+      });
     });
   }
 
@@ -163,7 +204,7 @@ export class EmployeesComponent implements OnInit {
   private loadEmployees() {
     this.api.getEmployees(this.companyId).subscribe({
       next: employees => this.employees.set(employees),
-      error: () => this.error.set('No pudimos cargar los empleados de esta empresa.')
+      error: () => this.error.set(this.i18n.t('employees.loadError'))
     });
   }
 

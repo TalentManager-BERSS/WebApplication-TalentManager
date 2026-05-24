@@ -1,6 +1,5 @@
 <section class="page-header">
   <div>
-    <p class="eyebrow">{{ 'support.eyebrow' | translate }}</p>
     <h1>{{ 'support.title' | translate }}</h1>
     <p class="lead">{{ 'support.lead' | translate }}</p>
   </div>
@@ -142,7 +141,7 @@
             {{ isUpdating(message) ? ('support.updating' | translate) : nextActionLabel(message) }}
           </button>
 
-          <button mat-icon-button type="button" aria-label="Eliminar" class="danger" (click)="remove(message)">
+          <button mat-icon-button type="button" [attr.aria-label]="'support.deleteTicket' | translate" class="danger" (click)="remove(message)">
             <mat-icon>delete</mat-icon>
           </button>
         </div>

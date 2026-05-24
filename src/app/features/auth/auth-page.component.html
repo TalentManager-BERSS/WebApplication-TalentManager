@@ -59,6 +59,7 @@
             <mat-label>{{ 'auth.username' | translate }}</mat-label>
             <input matInput formControlName="username" autocomplete="username">
             <mat-icon matSuffix>alternate_email</mat-icon>
+            <mat-error *ngIf="loginForm.controls.username.hasError('required')">{{ 'auth.required' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
@@ -73,6 +74,7 @@
                     [attr.aria-label]="(showPassword() ? 'profile.hidePassword' : 'profile.showPassword') | translate">
               <mat-icon>{{ showPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
+            <mat-error *ngIf="loginForm.controls.password.hasError('required')">{{ 'auth.required' | translate }}</mat-error>
           </mat-form-field>
 
           <p class="error" *ngIf="error()">
@@ -99,6 +101,8 @@
           <mat-form-field appearance="outline">
             <mat-label>{{ 'auth.accessEmail' | translate }}</mat-label>
             <input matInput formControlName="username" autocomplete="username">
+            <mat-error *ngIf="registerForm.controls.username.hasError('required')">{{ 'auth.required' | translate }}</mat-error>
+            <mat-error *ngIf="registerForm.controls.username.hasError('email')">{{ 'auth.invalidEmail' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
@@ -113,26 +117,33 @@
                     [attr.aria-label]="(showPassword() ? 'profile.hidePassword' : 'profile.showPassword') | translate">
               <mat-icon>{{ showPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
+            <mat-error *ngIf="registerForm.controls.password.hasError('required')">{{ 'auth.required' | translate }}</mat-error>
+            <mat-error *ngIf="registerForm.controls.password.hasError('minlength')">{{ 'auth.passwordMin' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'auth.firstName' | translate }}</mat-label>
             <input matInput formControlName="firstname">
+            <mat-error *ngIf="registerForm.controls.firstname.hasError('required')">{{ 'auth.required' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'auth.lastName' | translate }}</mat-label>
             <input matInput formControlName="lastname">
+            <mat-error *ngIf="registerForm.controls.lastname.hasError('required')">{{ 'auth.required' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'auth.company' | translate }}</mat-label>
             <input matInput formControlName="companyName">
+            <mat-error *ngIf="registerForm.controls.companyName.hasError('required')">{{ 'auth.required' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'auth.companyEmail' | translate }}</mat-label>
             <input matInput formControlName="companyEmail">
+            <mat-error *ngIf="registerForm.controls.companyEmail.hasError('required')">{{ 'auth.required' | translate }}</mat-error>
+            <mat-error *ngIf="registerForm.controls.companyEmail.hasError('email')">{{ 'auth.invalidEmail' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="span-2">

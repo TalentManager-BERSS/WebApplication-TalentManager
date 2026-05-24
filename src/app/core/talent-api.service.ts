@@ -117,13 +117,23 @@ export class TalentApiService {
   }
 
   createSupportMessage(companyId: number, content: string) {
-    const now = new Date().toISOString().slice(0, 19);
+    // Send the user's local wall-clock time (not UTC) so the ticket timestamp
+    // reads back as the moment they actually created it, in any timezone.
+    const now = this.localTimestamp();
     return this.http.post<SupportMessage>(`${this.baseUrl}/support-messages`, {
       companyId,
       content,
       requestDate: now,
       receivedAt: now
     });
+  }
+
+  /** Local "YYYY-MM-DDTHH:mm:ss" with no timezone suffix, matching the backend LocalDateTime. */
+  private localTimestamp(): string {
+    const d = new Date();
+    const pad = (n: number) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` +
+           `T${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
   }
 
   updateSupportStatus(id: number, newStatus: SupportStatus) {

@@ -2,6 +2,7 @@ import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -9,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AuthService } from '../../core/auth.service';
+import { ConfirmDialogComponent } from '../../core/confirm-dialog.component';
 import { I18nService } from '../../core/i18n.service';
 import { SupportMessage, SupportStatus } from '../../core/models';
 import { TalentApiService } from '../../core/talent-api.service';
@@ -29,6 +31,7 @@ type SupportFilter = 'ALL' | SupportStatus;
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatDialogModule,
     TranslatePipe
   ],
   templateUrl: './support.component.html',
@@ -39,6 +42,7 @@ export class SupportComponent implements OnInit {
   private readonly api = inject(TalentApiService);
   private readonly auth = inject(AuthService);
   private readonly snack = inject(MatSnackBar);
+  private readonly dialog = inject(MatDialog);
   private readonly i18n = inject(I18nService);
 
   readonly statuses: SupportStatus[] = ['PENDING', 'IN_PROGRESS', 'RESOLVED'];
@@ -110,11 +114,11 @@ export class SupportComponent implements OnInit {
           this.messages.set([message, ...this.messages()]);
           this.form.reset({ content: '' });
           this.saving.set(false);
-          this.snack.open('Solicitud creada', 'OK', { duration: 2200 });
+          this.snack.open(this.i18n.t('support.toastCreated'), 'OK', { duration: 2200, panelClass: 'snack-success' });
         },
         error: () => {
           this.saving.set(false);
-          this.snack.open('No pudimos crear la solicitud', 'OK', { duration: 3000 });
+          this.snack.open(this.i18n.t('support.toastCreateError'), 'OK', { duration: 3000 });
         }
       });
   }
@@ -132,25 +136,42 @@ export class SupportComponent implements OnInit {
       next: updated => {
         this.messages.set(this.messages().map(item => item.id === updated.id ? updated : item));
         this.setUpdating(message.id, false);
-        this.snack.open(`Ticket ${this.statusLabel(status).toLowerCase()}`, 'OK', { duration: 2200 });
+        this.snack.open(
+          this.i18n.t('support.toastStatusChanged', { status: this.statusLabel(status).toLowerCase() }),
+          'OK', { duration: 2200 });
       },
       error: () => {
         this.messages.set(this.messages().map(item =>
           item.id === message.id ? { ...item, status: previousStatus } : item
         ));
         this.setUpdating(message.id, false);
-        this.snack.open('No pudimos cambiar el estado del ticket', 'OK', { duration: 3000 });
+        this.snack.open(this.i18n.t('support.toastStatusError'), 'OK', { duration: 3000 });
       }
     });
   }
 
   remove(message: SupportMessage) {
-    this.api.deleteSupportMessage(message.id).subscribe({
-      next: () => {
-        this.messages.set(this.messages().filter(item => item.id !== message.id));
-        this.snack.open('Ticket eliminado', 'OK', { duration: 2200 });
-      },
-      error: () => this.snack.open('No pudimos eliminar el ticket', 'OK', { duration: 3000 })
+    const ref = this.dialog.open(ConfirmDialogComponent, {
+      panelClass: 'app-dialog-panel',
+      width: '420px',
+      data: {
+        title: this.i18n.t('support.deleteConfirmTitle'),
+        message: this.i18n.t('support.deleteConfirmText'),
+        confirmLabel: this.i18n.t('common.confirmDelete'),
+        cancelLabel: this.i18n.t('common.cancel'),
+        danger: true
+      }
+    });
+
+    ref.afterClosed().subscribe(confirmed => {
+      if (!confirmed) return;
+      this.api.deleteSupportMessage(message.id).subscribe({
+        next: () => {
+          this.messages.set(this.messages().filter(item => item.id !== message.id));
+          this.snack.open(this.i18n.t('support.toastDeleted'), 'OK', { duration: 2200 });
+        },
+        error: () => this.snack.open(this.i18n.t('support.toastDeleteError'), 'OK', { duration: 3000 })
+      });
     });
   }
 

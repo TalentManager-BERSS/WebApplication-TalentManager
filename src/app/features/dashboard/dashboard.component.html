@@ -1,13 +1,12 @@
 <section class="page-hero">
   <div class="page-hero__copy">
-    <p class="eyebrow">{{ 'dashboard.eyebrow' | translate }}</p>
     <h1>{{ 'dashboard.title' | translate }}</h1>
     <p class="lead">{{ 'dashboard.lead' | translate }}</p>
   </div>
 
   <div class="page-hero__status" *ngIf="overview() as data">
     <span class="page-hero__status-tag">{{ 'dashboard.health' | translate }}</span>
-    <strong>{{ data.healthLabel }}</strong>
+    <strong>{{ 'dashboard.healthStatus.' + data.healthLabel | translate }}</strong>
     <small *ngIf="data.openSupportMessages">{{ 'dashboard.ticketsOpen' | translate:{ count: data.openSupportMessages } }}</small>
     <small *ngIf="!data.openSupportMessages">{{ 'dashboard.noSupport' | translate }}</small>
   </div>
@@ -75,7 +74,7 @@
         <h3>{{ 'dashboard.readTitle' | translate }}</h3>
         <p>{{ 'dashboard.readText' | translate }}</p>
         <div class="trend-reading__metric" *ngIf="latestTrendPoint() as latest">
-          <span>{{ latest.label }}</span>
+          <span>{{ trendLabel(latest) }}</span>
           <strong>{{ latest.totalInput | currency:currency():'symbol':'1.0-0' }}</strong>
           <small>{{ latest.totalHours | number:'1.0-0' }} h</small>
         </div>
@@ -219,7 +218,7 @@
       <ul *ngIf="data.insights.length">
         <li *ngFor="let insight of data.insights">
           <mat-icon>arrow_circle_right</mat-icon>
-          <span>{{ insight }}</span>
+          <span>{{ 'dashboard.insight.' + insight | translate }}</span>
         </li>
       </ul>
 

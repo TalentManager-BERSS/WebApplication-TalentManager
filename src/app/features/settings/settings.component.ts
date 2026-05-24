@@ -171,7 +171,7 @@ export class SettingsComponent implements OnInit {
       next: updated => {
         this.employees.set(this.employees().map(e => e.id === updated.id ? updated : e));
         this.savingRoster.set(null);
-        this.snack.open(this.translate.instant('settings.rosterUpdated'), 'OK', { duration: 2200 });
+        this.snack.open(this.translate.instant('settings.rosterUpdated'), 'OK', { duration: 2200, panelClass: 'snack-success' });
       },
       error: () => {
         this.savingRoster.set(null);
@@ -244,7 +244,7 @@ export class SettingsComponent implements OnInit {
         this.applySettingsToForm(settings);
         this.currencyService.set(settings.currencyCode);
         this.savingCompany.set(false);
-        this.snack.open(this.translate.instant('settings.savedToast'), 'OK', { duration: 2400 });
+        this.snack.open(this.translate.instant('settings.savedToast'), 'OK', { duration: 2400, panelClass: 'snack-success' });
       },
       error: () => {
         this.savingCompany.set(false);

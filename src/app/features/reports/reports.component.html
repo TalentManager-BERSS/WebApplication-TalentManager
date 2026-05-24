@@ -1,6 +1,5 @@
 <section class="page-header">
   <div>
-    <p class="eyebrow">{{ 'reports.eyebrow' | translate }}</p>
     <h1>{{ 'reports.title' | translate }}</h1>
     <p class="lead">{{ 'reports.lead' | translate }}</p>
   </div>
@@ -107,7 +106,7 @@
           <span class="employee-card__avatar">{{ employeeInitials(employee) }}</span>
           <span class="employee-card__body">
             <strong>{{ employeeFullName(employee) }}</strong>
-            <small>{{ employee.occupation }} - {{ employee.teamName }}</small>
+            <small>{{ employee.occupation }} · {{ employee.teamName }}</small>
           </span>
         </button>
       </div>
@@ -118,13 +117,13 @@
         <mat-icon>badge</mat-icon>
         <div>
           <small>{{ 'reports.workdayFor' | translate }}</small>
-          <strong>{{ employeeFullName(employee) }} - {{ employee.teamName }}</strong>
+          <strong>{{ employeeFullName(employee) }} · {{ employee.teamName }}</strong>
         </div>
       </div>
 
       <mat-form-field appearance="outline" class="span-2">
         <mat-label>{{ 'reports.date' | translate }}</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="date">
+        <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="date">
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -147,16 +146,16 @@
                [placeholder]="incomePlaceholder()">
         <span matTextSuffix class="currency-suffix">{{ currency() }}</span>
         <mat-hint *ngIf="suggestedIncome() > 0">
-          Si lo dejas vacío se usará la tarifa: {{ suggestedIncome() | currency:currency():'symbol':'1.0-2' }}
+          {{ 'reports.incomeAutoHint' | translate }} {{ suggestedIncome() | currency:currency():'symbol':'1.0-2' }}
         </mat-hint>
         <mat-hint *ngIf="suggestedIncome() === 0">
-          Configura la tarifa por hora del empleado en Ajustes para autocompletar.
+          {{ 'reports.incomeNoRateHint' | translate }}
         </mat-hint>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>{{ 'reports.score' | translate }}</mat-label>
-        <input matInput type="number" formControlName="score">
+        <input matInput type="number" min="0" max="10" step="1" formControlName="score">
       </mat-form-field>
 
       <div class="hours-preview span-2">
@@ -228,7 +227,7 @@
           <span class="employee-card__avatar">{{ employeeInitials(employee) }}</span>
           <span class="employee-card__body">
             <strong>{{ employeeFullName(employee) }}</strong>
-            <small>{{ employee.occupation }} - {{ employee.teamName }}</small>
+            <small>{{ employee.occupation }} · {{ employee.teamName }}</small>
           </span>
           <span class="employee-card__count">{{ aggregateCountForEmployee(employee.id) }}</span>
         </button>
@@ -245,7 +244,7 @@
         <mat-icon>person</mat-icon>
         <div>
           <small>{{ 'reports.selectedEmployee' | translate }}</small>
-          <strong>{{ employeeFullName(employee) }} - {{ employee.teamName }}</strong>
+          <strong>{{ employeeFullName(employee) }} · {{ employee.teamName }}</strong>
         </div>
       </div>
 
@@ -253,8 +252,8 @@
         <mat-label>{{ 'reports.monthlyClosing' | translate }}</mat-label>
         <mat-select formControlName="aggregateKey" [disabled]="selectedEmployeeAggregates().length === 0">
           <mat-option *ngFor="let aggregate of selectedEmployeeAggregates()" [value]="aggregateKeyOf(aggregate)">
-            {{ monthName(aggregate.month) }} {{ aggregate.year }} - {{ aggregate.dayCount }} {{ 'reports.days' | translate }} -
-            {{ aggregate.completionRate | number:'1.0-0' }}% horas - score {{ aggregate.averageScore | number:'1.1-1' }}
+            {{ monthName(aggregate.month) }} {{ aggregate.year }} · {{ aggregate.dayCount }} {{ 'reports.days' | translate }} ·
+            {{ aggregate.completionRate | number:'1.0-0' }}% {{ 'reports.hoursWord' | translate }} · score {{ aggregate.averageScore | number:'1.1-1' }}
           </mat-option>
         </mat-select>
         <mat-hint>{{ 'reports.monthlyHint' | translate }}</mat-hint>
@@ -262,11 +261,11 @@
 
       <div class="summary-preview" *ngIf="selectedAggregate() as summary">
         <div class="summary-preview__head">
-          <span>{{ summary.employeeName }} - {{ summary.teamName }}</span>
+          <span>{{ summary.employeeName }} · {{ summary.teamName }}</span>
           <strong>{{ monthName(summary.month) }} {{ summary.year }}</strong>
         </div>
         <div class="summary-preview__chips">
-          <small class="chip"><mat-icon>schedule</mat-icon> {{ summary.completionRate | number:'1.0-0' }}% horas</small>
+          <small class="chip"><mat-icon>schedule</mat-icon> {{ summary.completionRate | number:'1.0-0' }}% {{ 'reports.hoursWord' | translate }}</small>
           <small class="chip"><mat-icon>timer</mat-icon> {{ summary.completedHours | number:'1.0-0' }}/{{ summary.totalHours }} h</small>
           <small class="chip"><mat-icon>payments</mat-icon> {{ summary.totalInput | currency:currency():'symbol':'1.0-0' }}</small>
           <small class="chip"><mat-icon>military_tech</mat-icon> {{ summary.averageScore | number:'1.1-1' }}/10</small>
@@ -329,7 +328,7 @@
         <div class="report-item__body">
           <strong>{{ report.title }}</strong>
           <p>{{ report.content }}</p>
-          <small><mat-icon>tag</mat-icon> {{ monthShort(report.month) }} {{ report.year }} - {{ employeeName(report.employeeId) }}</small>
+          <small><mat-icon>tag</mat-icon> {{ monthShort(report.month) }} {{ report.year }} · {{ employeeName(report.employeeId) }}</small>
         </div>
         <button mat-icon-button type="button" class="danger" [attr.aria-label]="'reports.deleteReport' | translate" (click)="deleteReport(report)">
           <mat-icon>delete</mat-icon>

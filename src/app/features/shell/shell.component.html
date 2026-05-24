@@ -8,13 +8,11 @@
       </span>
       <span class="brand__text">
         <strong>TalentManager</strong>
-        <small>{{ 'shell.brandTagline' | translate }}</small>
       </span>
     </a>
 
     <div class="nav-group">
-      <p class="nav-group__title">{{ 'shell.operation' | translate }}</p>
-      <nav aria-label="Main navigation">
+      <nav [attr.aria-label]="'shell.mainNav' | translate">
         @for (item of navItems; track item.path; let i = $index) {
           <a [routerLink]="item.path" routerLinkActive="active" class="nav-item" [style.--stagger]="i">
             <span class="nav-item__indicator" aria-hidden="true"></span>
@@ -53,7 +51,6 @@
   <main class="workspace">
     <header class="topbar">
       <div class="topbar__title" *ngIf="currentNav() as nav">
-        <p class="topbar__sub">{{ nav.hintKey | translate }}</p>
         <h1>
           <mat-icon class="topbar__title-icon">{{ nav.icon }}</mat-icon>
           {{ nav.labelKey | translate }}
