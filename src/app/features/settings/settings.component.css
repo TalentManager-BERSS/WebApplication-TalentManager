@@ -288,8 +288,7 @@ html[data-theme='dark'] .margin-card mat-icon {
 .roster-row {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
-  gap: 18px;
+  gap: 16px;
   padding: 18px;
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-md);
@@ -310,6 +309,8 @@ html[data-theme='dark'] .margin-card mat-icon {
   display: flex;
   align-items: center;
   gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .avatar {
@@ -327,6 +328,7 @@ html[data-theme='dark'] .margin-card mat-icon {
   box-shadow: 0 0 0 2px var(--surface-card), 0 0 0 3px var(--brand-100);
 }
 
+html[data-theme='dark'] .avatar { color: #07201c; }
 .avatar[data-pos='1'] { background: var(--brand-500); }
 .avatar[data-pos='2'] {
   background: var(--accent-600);
@@ -362,7 +364,7 @@ html[data-theme='dark'] .margin-card mat-icon {
 .roster-row__metrics {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   padding: 10px 12px;
   border-radius: var(--radius-sm);

@@ -149,7 +149,7 @@
     "incomeLabel": "Revenue",
     "costLabel": "Cost",
     "marginLabel": "Margin",
-    "targetExplained": "Target is {{hours}} h per month (configurable in Configuration)."
+    "targetExplained": "Completion compares worked hours against the expected hours of the logged workdays."
   },
   "reports": {
     "title": "Executive reports",
@@ -217,8 +217,9 @@
     "saveRecordError": "We couldn't save the record.",
     "employeeFallback": "Employee #{{id}}",
     "hoursWord": "hours",
-    "incomeAutoHint": "If left empty, the hourly rate will be used:",
-    "incomeNoRateHint": "Set the employee's hourly rate in Configuration to autofill.",
+    "incomeHintShort": "Leave it empty to calculate it from the employee's hourly rate, or the default set in Configuration.",
+    "incomePreview": "Income that will be recorded",
+    "incomeNoRate": "Set an hourly rate",
     "narrative": {
       "titleAuto": "{{month}} {{year}} decision — {{name}}",
       "overP1": "During {{month}} {{year}}, {{name}} ({{team}}) exceeded 100% of the planned hours: logged {{hours}} h against {{totalHours}} h expected, with {{excessHours}} extra hours and an average score of {{score}}/10.",
@@ -327,7 +328,6 @@
     "compensation": "Compensation",
     "compensationHelp": "If left at 0, the company default is applied.",
     "monthlyRate": "Monthly rate",
-    "monthlyCost": "Monthly cost",
     "deleteConfirmTitle": "Delete employee?",
     "deleteConfirmText": "You're about to permanently remove {{name}}. This action can't be undone.",
     "toastCreated": "Employee added",
@@ -338,15 +338,15 @@
   },
   "settings": {
     "title": "Company configuration",
-    "lead": "Define how your company operates: expected hours that drive the completion target, the currency used for KPIs, and the per-hour rates that feed revenue, cost and margin automatically.",
+    "lead": "Define how your company operates: the expected hours per day (used to measure each workday's completion), the currency used for KPIs, and the per-hour rates that feed revenue, cost and margin automatically.",
     "operationsTitle": "Calendar and currency",
-    "operationsHelp": "These values define the monthly hours target (completion) and the currency used across KPIs.",
+    "operationsHelp": "Expected hours per day measure each logged workday's completion; working days are used to estimate monthly amounts, and the currency applies across all KPIs.",
     "expectedDailyHours": "Expected hours per day",
     "expectedDailyHoursHint": "Recommended: 8",
     "workingDaysPerMonth": "Working days per month",
     "workingDaysPerMonthHint": "Recommended: 20-22",
-    "monthlyTarget": "Monthly hours target",
-    "monthlyTargetHint": "Computed: daily hours × working days",
+    "monthlyTarget": "Planned hours per month",
+    "monthlyTargetHint": "To estimate monthly amounts: hours per day × working days",
     "currency": "Workspace currency",
     "currencyHint": "Applied across all KPIs and reports",
     "currencySearch": "Search currency",
@@ -366,6 +366,9 @@
     "rosterHelp": "Each employee can have their own rate. Leave it at 0 to fall back to the defaults above.",
     "rosterEmpty": "No employees yet. Create at least one to configure compensation.",
     "rosterUpdated": "Rates updated",
+    "usingDefault": "Uses default:",
+    "monthlySalary": "Monthly salary (what you pay)",
+    "monthlySalaryHint": "Derived from the hourly cost; type it and we'll set the hourly cost automatically.",
     "marginPreview": "Estimated margin per hour",
     "marginPreviewHint": "Rate - Cost (zero when either is missing)",
     "noBilling": "No active rates: the dashboard will show 0 until you define them."

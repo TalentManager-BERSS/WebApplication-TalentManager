@@ -1,4 +1,5 @@
-import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+import { MoneyPipe } from '../../core/money.pipe';
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,7 +25,7 @@ import { CurrencyChangeDialogComponent } from './currency-change-dialog.componen
   imports: [
     NgFor,
     NgIf,
-    CurrencyPipe,
+    MoneyPipe,
     ReactiveFormsModule,
     MatButtonModule,
     MatDialogModule,
@@ -97,10 +98,36 @@ export class SettingsComponent implements OnInit {
   readonly rosterForms = new Map<number, ReturnType<SettingsComponent['rosterForm']>>();
 
   rosterForm(employee: Employee) {
+    const hourlyCost = employee.hourlyCost ?? 0;
     return this.fb.nonNullable.group({
       hourlyRate: [employee.hourlyRate ?? 0, [Validators.required, Validators.min(0)]],
-      hourlyCost: [employee.hourlyCost ?? 0, [Validators.required, Validators.min(0)]]
+      hourlyCost: [hourlyCost, [Validators.required, Validators.min(0)]],
+      // Convenience field: lets managers think in monthly salary; kept in sync with hourlyCost.
+      monthlyCost: [Math.round(hourlyCost * this.monthlyFactor()), [Validators.min(0)]]
     });
+  }
+
+  /** Hours-per-month used to convert between hourly cost and monthly salary. */
+  private monthlyFactor(): number {
+    const dailyHours = this.companyForm.controls.expectedDailyHours.value || 8;
+    const days = this.companyForm.controls.workingDaysPerMonth.value || 21;
+    return dailyHours * days;
+  }
+
+  /** When the hourly cost changes, refresh the monthly salary field (no event loop). */
+  syncMonthlyFromHourly(employee: Employee) {
+    const form = this.formFor(employee);
+    const cost = form.controls.hourlyCost.value || 0;
+    form.controls.monthlyCost.setValue(Math.round(cost * this.monthlyFactor()), { emitEvent: false });
+  }
+
+  /** When the manager types a monthly salary, derive the hourly cost the backend stores. */
+  syncHourlyFromMonthly(employee: Employee) {
+    const form = this.formFor(employee);
+    const monthly = form.controls.monthlyCost.value || 0;
+    const factor = this.monthlyFactor();
+    const hourly = factor > 0 ? Math.round((monthly / factor) * 100) / 100 : 0;
+    form.controls.hourlyCost.setValue(hourly, { emitEvent: false });
   }
 
   formFor(employee: Employee) {
@@ -119,7 +146,10 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.companyForm.valueChanges.subscribe(() => this.companyTrigger.update(v => v + 1));
+    this.companyForm.valueChanges.subscribe(() => {
+      this.companyTrigger.update(v => v + 1);
+      this.refreshMonthlyCosts();
+    });
     this.loadAll();
   }
 
@@ -189,19 +219,9 @@ export class SettingsComponent implements OnInit {
   }
 
   monthlyRate(employee: Employee) {
-    const dailyHours = this.companyForm.controls.expectedDailyHours.value ?? 8;
-    const days = this.companyForm.controls.workingDaysPerMonth.value ?? 21;
     const form = this.formFor(employee);
     const rate = form.controls.hourlyRate.value || 0;
-    return rate * dailyHours * days;
-  }
-
-  monthlyCost(employee: Employee) {
-    const dailyHours = this.companyForm.controls.expectedDailyHours.value ?? 8;
-    const days = this.companyForm.controls.workingDaysPerMonth.value ?? 21;
-    const form = this.formFor(employee);
-    const cost = form.controls.hourlyCost.value || 0;
-    return cost * dailyHours * days;
+    return rate * this.monthlyFactor();
   }
 
   currencyDisplay(code: string): string {
@@ -279,6 +299,10 @@ export class SettingsComponent implements OnInit {
       defaultHourlyRate: settings.defaultHourlyRate,
       defaultHourlyCost: settings.defaultHourlyCost
     });
+  }
+
+  private refreshMonthlyCosts() {
+    this.employees().forEach(employee => this.syncMonthlyFromHourly(employee));
   }
 
   private normalize(value: string) {

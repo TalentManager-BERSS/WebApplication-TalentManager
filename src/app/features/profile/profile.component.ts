@@ -1,4 +1,5 @@
-import { DatePipe, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
+import { LocalDatePipe } from '../../core/local-date.pipe';
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,7 +18,7 @@ import { TalentApiService } from '../../core/talent-api.service';
   standalone: true,
   imports: [
     NgIf,
-    DatePipe,
+    LocalDatePipe,
     ReactiveFormsModule,
     MatButtonModule,
     MatFormFieldModule,

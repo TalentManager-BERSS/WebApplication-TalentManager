@@ -1,4 +1,5 @@
-import { CurrencyPipe, DecimalPipe, NgFor, NgIf } from '@angular/common';
+import { DecimalPipe, NgFor, NgIf } from '@angular/common';
+import { MoneyPipe } from '../../core/money.pipe';
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,7 +30,7 @@ import { TalentApiService } from '../../core/talent-api.service';
   imports: [
     NgFor,
     NgIf,
-    CurrencyPipe,
+    MoneyPipe,
     DecimalPipe,
     ReactiveFormsModule,
     MatButtonModule,
@@ -159,6 +160,14 @@ export class ReportsComponent implements OnInit {
   readonly incomePlaceholder = computed(() => {
     const value = this.suggestedIncome();
     return value > 0 ? value.toFixed(2) : '0';
+  });
+
+  /** The income that will actually be recorded: a manually typed amount wins, otherwise the rate-based estimate. */
+  readonly effectiveIncome = computed(() => {
+    this.dailyContextTrigger();
+    const manual = this.dailyForm.controls.inputAmount.value;
+    if (manual != null && manual > 0) return manual;
+    return this.suggestedIncome();
   });
 
   readonly hoursWorkedPreview = computed(() => {
@@ -307,11 +316,13 @@ export class ReportsComponent implements OnInit {
   }
 
   formatCurrencyShort(amount: number) {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: this.currency() || 'USD',
-      maximumFractionDigits: 0
-    }).format(amount);
+    const option = findCurrency(this.currency());
+    const symbol = option?.symbol ?? (this.currency() || '');
+    const sign = amount < 0 ? '-' : '';
+    const num = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(Math.abs(amount));
+    if (option?.symbolAfter) return `${sign}${num} ${symbol}`;
+    const gap = symbol.length > 1 ? ' ' : '';
+    return `${sign}${symbol}${gap}${num}`;
   }
 
   deleteReport(report: Report) {
@@ -367,8 +378,9 @@ export class ReportsComponent implements OnInit {
 
   formatTime(decimal: number) {
     if (decimal === null || decimal === undefined || Number.isNaN(decimal)) return '--';
-    const hours = Math.floor(decimal);
-    const minutes = Math.round((decimal - hours) * 60);
+    const totalMinutes = Math.round(decimal * 60);
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
   }
 
@@ -380,6 +392,7 @@ export class ReportsComponent implements OnInit {
     if (!value || !/^\d{1,2}:\d{2}$/.test(value)) return null;
     const [h, m] = value.split(':').map(Number);
     if (h < 0 || h > 24 || m < 0 || m >= 60) return null;
+    if (h === 24 && m !== 0) return null;
     return h + m / 60;
   }
 

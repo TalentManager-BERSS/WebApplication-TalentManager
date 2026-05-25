@@ -299,6 +299,9 @@ tbody tr:nth-child(4n+2) .avatar { background: var(--brand-500); }
 tbody tr:nth-child(4n+3) .avatar { background: var(--accent-600); box-shadow: 0 0 0 2px var(--surface-card), 0 0 0 3px var(--accent-100); }
 tbody tr:nth-child(4n+4) .avatar { background: var(--brand-400); }
 
+/* Dark mode inverts the brand scale to light mint, so the initials need dark ink */
+html[data-theme='dark'] .avatar { color: #07201c; }
+
 .person div {
   display: grid;
   line-height: 1.2;

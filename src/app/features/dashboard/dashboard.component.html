@@ -26,7 +26,7 @@
     <article class="kpi-card">
       <div class="kpi-card__icon kpi-card__icon--accent"><mat-icon>payments</mat-icon></div>
       <span class="kpi-card__label">{{ 'dashboard.input' | translate }}</span>
-      <strong class="kpi-card__value">{{ data.totalInput | currency:currency():'symbol':'1.0-0' }}</strong>
+      <strong class="kpi-card__value">{{ data.totalInput | money:currency():'1.0-0' }}</strong>
       <small class="kpi-card__hint">{{ 'dashboard.inputHint' | translate }}</small>
     </article>
 
@@ -75,7 +75,7 @@
         <p>{{ 'dashboard.readText' | translate }}</p>
         <div class="trend-reading__metric" *ngIf="latestTrendPoint() as latest">
           <span>{{ trendLabel(latest) }}</span>
-          <strong>{{ latest.totalInput | currency:currency():'symbol':'1.0-0' }}</strong>
+          <strong>{{ latest.totalInput | money:currency():'1.0-0' }}</strong>
           <small>{{ latest.totalHours | number:'1.0-0' }} h</small>
         </div>
         <div class="trend-reading__note">
@@ -104,15 +104,15 @@
       <div class="contrib-totals" *ngIf="contributorsHasData()">
         <span class="metric-chip">
           <small>{{ 'dashboard.totalRevenue' | translate }}</small>
-          <strong>{{ totalRevenue() | currency:currency():'symbol':'1.0-0' }}</strong>
+          <strong>{{ totalRevenue() | money:currency():'1.0-0' }}</strong>
         </span>
         <span class="metric-chip metric-chip--cost">
           <small>{{ 'dashboard.totalCost' | translate }}</small>
-          <strong>{{ totalCost() | currency:currency():'symbol':'1.0-0' }}</strong>
+          <strong>{{ totalCost() | money:currency():'1.0-0' }}</strong>
         </span>
         <span class="metric-chip metric-chip--margin">
           <small>{{ 'dashboard.totalMargin' | translate }} · {{ globalMarginRate() | number:'1.0-0' }}%</small>
-          <strong>{{ totalMargin() | currency:currency():'symbol':'1.0-0' }}</strong>
+          <strong>{{ totalMargin() | money:currency():'1.0-0' }}</strong>
         </span>
       </div>
     </header>
@@ -137,7 +137,7 @@
               <small>{{ contributor.teamName }} · {{ contributor.hoursWorked | number:'1.0-0' }} h</small>
             </div>
             <span class="contrib-margin"
-                  [matTooltip]="'dashboard.marginTooltip' | translate:{ rate: (contributor.marginRate | number:'1.0-1'), revenue: (contributor.totalInput | currency:currency():'symbol':'1.0-0'), margin: (contributor.margin | currency:currency():'symbol':'1.0-0') }"
+                  [matTooltip]="'dashboard.marginTooltip' | translate:{ rate: (contributor.marginRate | number:'1.0-1'), revenue: (contributor.totalInput | money:currency():'1.0-0'), margin: (contributor.margin | money:currency():'1.0-0') }"
                   [class.contrib-margin--low]="contributor.marginRate < 20"
                   [class.contrib-margin--mid]="contributor.marginRate >= 20 && contributor.marginRate < 40"
                   [class.contrib-margin--high]="contributor.marginRate >= 40">
@@ -199,7 +199,7 @@
             <mat-progress-bar mode="determinate" [value]="team.completionRate"></mat-progress-bar>
           </div>
           <div class="team-score">
-            <strong>{{ team.totalInput | currency:currency():'symbol':'1.0-0' }}</strong>
+            <strong>{{ team.totalInput | money:currency():'1.0-0' }}</strong>
             <span>Score {{ team.averageScore | number:'1.1-1' }}/10</span>
           </div>
         </div>

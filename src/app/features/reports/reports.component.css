@@ -191,6 +191,10 @@
   box-shadow: 0 4px 10px rgba(200, 107, 50, 0.22);
 }
 
+/* Dark mode: brand fills become light mint, so badge/avatar text must be dark */
+html[data-theme='dark'] .flow-strip span,
+html[data-theme='dark'] .employee-card__avatar { color: #07201c; }
+
 .flow-strip div {
   display: grid;
   gap: 3px;
@@ -472,8 +476,14 @@ button[mat-flat-button] {
   flex-shrink: 0;
 }
 
-/* Hours preview */
-.hours-preview {
+/* Hours + income preview */
+.metric-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.metric-preview__item {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -481,32 +491,61 @@ button[mat-flat-button] {
   border: 1px solid var(--brand-100);
   border-radius: var(--radius-md);
   background: var(--brand-50);
+  min-width: 0;
 }
 
-.hours-preview mat-icon {
+.metric-preview__item--income {
+  border-color: var(--accent-300);
+  background: var(--accent-100);
+}
+
+.metric-preview__item mat-icon {
   display: grid;
   place-items: center;
   width: 36px;
   height: 36px;
+  flex-shrink: 0;
   border-radius: 10px;
   background: var(--brand-100);
   color: var(--brand-700);
 }
 
-.hours-preview small {
+.metric-preview__item--income mat-icon {
+  background: var(--accent-300);
+  color: var(--accent-700);
+}
+
+.metric-preview__item small {
   display: block;
   color: var(--ink-400);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.hours-preview strong {
+.metric-preview__item strong {
   display: block;
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   color: var(--brand-700);
+  line-height: 1.15;
+}
+
+.metric-preview__item--income strong {
+  color: var(--accent-700);
+}
+
+.metric-preview__hint {
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  color: var(--ink-400) !important;
+}
+
+@media (max-width: 560px) {
+  .metric-preview {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Summary preview */

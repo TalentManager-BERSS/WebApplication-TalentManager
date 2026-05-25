@@ -12,6 +12,8 @@ export interface CurrencyOption {
   nameEn: string;
   /** Visual symbol (used by some labels and chips). */
   symbol: string;
+  /** When true the symbol is placed after the amount (e.g. "1 234 kr", "100 zł"). */
+  symbolAfter?: boolean;
 }
 
 export const CURRENCY_CATALOG: CurrencyOption[] = [
@@ -60,17 +62,17 @@ export const CURRENCY_CATALOG: CurrencyOption[] = [
   { code: 'NIO', nameEs: 'Córdoba nicaragüense',     nameEn: 'Nicaraguan córdoba',    symbol: 'C$' },
   { code: 'PAB', nameEs: 'Balboa panameña',          nameEn: 'Panamanian balboa',     symbol: 'B/.' },
 
-  { code: 'NOK', nameEs: 'Corona noruega',           nameEn: 'Norwegian krone',       symbol: 'kr' },
-  { code: 'SEK', nameEs: 'Corona sueca',             nameEn: 'Swedish krona',         symbol: 'kr' },
-  { code: 'DKK', nameEs: 'Corona danesa',            nameEn: 'Danish krone',          symbol: 'kr' },
-  { code: 'ISK', nameEs: 'Corona islandesa',         nameEn: 'Icelandic króna',       symbol: 'kr' },
-  { code: 'PLN', nameEs: 'Esloti polaco',            nameEn: 'Polish złoty',          symbol: 'zł' },
-  { code: 'CZK', nameEs: 'Corona checa',             nameEn: 'Czech koruna',          symbol: 'Kč' },
-  { code: 'HUF', nameEs: 'Forinto húngaro',          nameEn: 'Hungarian forint',      symbol: 'Ft' },
-  { code: 'RON', nameEs: 'Leu rumano',               nameEn: 'Romanian leu',          symbol: 'lei' },
-  { code: 'BGN', nameEs: 'Lev búlgaro',              nameEn: 'Bulgarian lev',         symbol: 'лв' },
-  { code: 'UAH', nameEs: 'Grivna ucraniana',         nameEn: 'Ukrainian hryvnia',     symbol: '₴' },
-  { code: 'RUB', nameEs: 'Rublo ruso',               nameEn: 'Russian ruble',         symbol: '₽' },
+  { code: 'NOK', nameEs: 'Corona noruega',           nameEn: 'Norwegian krone',       symbol: 'kr',  symbolAfter: true },
+  { code: 'SEK', nameEs: 'Corona sueca',             nameEn: 'Swedish krona',         symbol: 'kr',  symbolAfter: true },
+  { code: 'DKK', nameEs: 'Corona danesa',            nameEn: 'Danish krone',          symbol: 'kr',  symbolAfter: true },
+  { code: 'ISK', nameEs: 'Corona islandesa',         nameEn: 'Icelandic króna',       symbol: 'kr',  symbolAfter: true },
+  { code: 'PLN', nameEs: 'Esloti polaco',            nameEn: 'Polish złoty',          symbol: 'zł',  symbolAfter: true },
+  { code: 'CZK', nameEs: 'Corona checa',             nameEn: 'Czech koruna',          symbol: 'Kč',  symbolAfter: true },
+  { code: 'HUF', nameEs: 'Forinto húngaro',          nameEn: 'Hungarian forint',      symbol: 'Ft',  symbolAfter: true },
+  { code: 'RON', nameEs: 'Leu rumano',               nameEn: 'Romanian leu',          symbol: 'lei', symbolAfter: true },
+  { code: 'BGN', nameEs: 'Lev búlgaro',              nameEn: 'Bulgarian lev',         symbol: 'лв',  symbolAfter: true },
+  { code: 'UAH', nameEs: 'Grivna ucraniana',         nameEn: 'Ukrainian hryvnia',     symbol: '₴',   symbolAfter: true },
+  { code: 'RUB', nameEs: 'Rublo ruso',               nameEn: 'Russian ruble',         symbol: '₽',   symbolAfter: true },
 
   { code: 'TWD', nameEs: 'Dólar taiwanés',           nameEn: 'New Taiwan dollar',     symbol: 'NT$' },
   { code: 'PKR', nameEs: 'Rupia pakistaní',          nameEn: 'Pakistani rupee',       symbol: '₨' },

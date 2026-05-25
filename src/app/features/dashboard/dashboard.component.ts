@@ -1,5 +1,6 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
-import { CurrencyPipe, DecimalPipe, NgFor, NgIf } from '@angular/common';
+import { DecimalPipe, NgFor, NgIf } from '@angular/common';
+import { MoneyPipe } from '../../core/money.pipe';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -23,7 +24,7 @@ import { AnalyticsOverview, EmployeeContribution, RevenueTrendPoint, TeamPerform
   imports: [
     NgIf,
     NgFor,
-    CurrencyPipe,
+    MoneyPipe,
     DecimalPipe,
     MatIconModule,
     MatProgressBarModule,

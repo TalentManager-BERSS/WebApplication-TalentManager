@@ -114,7 +114,7 @@
               <mat-icon>{{ statusIcon(message.status) }}</mat-icon>
               {{ statusLabel(message.status) }}
             </span>
-            <small><mat-icon>schedule</mat-icon> {{ message.receivedAt | date:'medium' }}</small>
+            <small><mat-icon>schedule</mat-icon> {{ message.receivedAt | localDate:'datetime' }}</small>
           </div>
           <p>{{ message.content }}</p>
         </div>

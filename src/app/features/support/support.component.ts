@@ -1,4 +1,5 @@
-import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+import { LocalDatePipe } from '../../core/local-date.pipe';
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,7 +24,7 @@ type SupportFilter = 'ALL' | SupportStatus;
   imports: [
     NgFor,
     NgIf,
-    DatePipe,
+    LocalDatePipe,
     ReactiveFormsModule,
     MatButtonModule,
     MatFormFieldModule,
