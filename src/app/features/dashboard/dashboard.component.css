@@ -610,6 +610,9 @@
   transform: translateY(-1px);
 }
 
+/* Dark mode: light mint button needs dark label */
+html[data-theme='dark'] .empty__cta { color: #07201c; }
+
 .empty__cta mat-icon {
   font-size: 18px;
   width: 18px;

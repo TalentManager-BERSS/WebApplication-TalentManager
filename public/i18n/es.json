@@ -149,7 +149,7 @@
     "incomeLabel": "Ingreso",
     "costLabel": "Costo",
     "marginLabel": "Margen",
-    "targetExplained": "El objetivo es {{hours}} h al mes (configurable en Configuración)."
+    "targetExplained": "El cumplimiento compara las horas trabajadas con las horas esperadas de las jornadas registradas."
   },
   "reports": {
     "title": "Reportes ejecutivos",
@@ -217,8 +217,9 @@
     "saveRecordError": "No pudimos guardar el registro.",
     "employeeFallback": "Empleado #{{id}}",
     "hoursWord": "horas",
-    "incomeAutoHint": "Si lo dejas vacío se usará la tarifa:",
-    "incomeNoRateHint": "Configura la tarifa por hora del empleado en Configuración para autocompletar.",
+    "incomeHintShort": "Déjalo vacío para calcularlo con la tarifa por hora del empleado, o la predeterminada en Configuración.",
+    "incomePreview": "Ingreso que se registrará",
+    "incomeNoRate": "Define una tarifa por hora",
     "narrative": {
       "titleAuto": "Decisión {{month}} {{year}} — {{name}}",
       "overP1": "Durante {{month}} {{year}}, {{name}} ({{team}}) superó el 100% de las horas planificadas: registró {{hours}} h frente a {{totalHours}} h esperadas, con {{excessHours}} h adicionales y un score promedio de {{score}}/10.",
@@ -327,7 +328,6 @@
     "compensation": "Compensación",
     "compensationHelp": "Si lo dejas en 0, se usará el valor por defecto de la empresa.",
     "monthlyRate": "Tarifa mensual",
-    "monthlyCost": "Costo mensual",
     "deleteConfirmTitle": "¿Eliminar empleado?",
     "deleteConfirmText": "Vas a eliminar a {{name}} de forma permanente. Esta acción no se puede deshacer.",
     "toastCreated": "Empleado agregado",
@@ -338,15 +338,15 @@
   },
   "settings": {
     "title": "Configuración de la empresa",
-    "lead": "Aquí defines cómo trabaja tu empresa: las horas esperadas que marcan el objetivo de cumplimiento, la moneda con la que se muestran los KPIs y las tarifas por hora que alimentan ingreso, costo y margen automáticamente.",
+    "lead": "Aquí defines cómo trabaja tu empresa: las horas esperadas por día (con las que se mide el cumplimiento de cada jornada), la moneda con la que se muestran los KPIs y las tarifas por hora que alimentan ingreso, costo y margen automáticamente.",
     "operationsTitle": "Calendario y moneda",
-    "operationsHelp": "Estos valores definen el objetivo mensual de horas (cumplimiento) y la moneda con la que se muestran los KPIs.",
+    "operationsHelp": "Las horas esperadas por día miden el cumplimiento de cada jornada registrada; los días laborales sirven para estimar montos mensuales, y la moneda se aplica a todos los KPIs.",
     "expectedDailyHours": "Horas esperadas por día",
     "expectedDailyHoursHint": "Recomendado: 8",
     "workingDaysPerMonth": "Días laborales al mes",
     "workingDaysPerMonthHint": "Recomendado: 20-22",
-    "monthlyTarget": "Objetivo mensual de horas",
-    "monthlyTargetHint": "Calculado: horas esperadas × días laborales",
+    "monthlyTarget": "Horas planificadas al mes",
+    "monthlyTargetHint": "Para estimar montos mensuales: horas por día × días laborales",
     "currency": "Moneda del workspace",
     "currencyHint": "Se aplica a todos los KPIs e informes",
     "currencySearch": "Buscar moneda",
@@ -366,6 +366,9 @@
     "rosterHelp": "Cada empleado puede tener su propia tarifa. Si la dejas en 0, se aplica el valor por defecto definido arriba.",
     "rosterEmpty": "Aún no hay empleados. Crea al menos uno para configurar su compensación.",
     "rosterUpdated": "Tarifas actualizadas",
+    "usingDefault": "Usa por defecto:",
+    "monthlySalary": "Sueldo mensual (lo que pagas)",
+    "monthlySalaryHint": "Se calcula desde el costo por hora; escríbelo y ajustamos el costo por hora automáticamente.",
     "marginPreview": "Margen estimado por hora",
     "marginPreviewHint": "Tarifa - Costo (en cero si falta uno de los dos)",
     "noBilling": "Sin tarifas activas: el dashboard mostrará 0 hasta que las definas."

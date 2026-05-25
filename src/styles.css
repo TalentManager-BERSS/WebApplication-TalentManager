@@ -95,12 +95,12 @@
 html[data-theme='dark'] {
   color-scheme: dark;
 
-  --surface-app: #070b0a;
-  --surface-card: #0f1715;
-  --surface-soft: #131d1a;
-  --surface-muted: #1c2824;
-  --surface-elevated: #18221f;
-  --surface-overlay: rgba(15, 23, 21, 0.80);
+  --surface-app: #080d0b;
+  --surface-card: #111b18;
+  --surface-soft: #16211d;
+  --surface-muted: #1f2c27;
+  --surface-elevated: #1b2622;
+  --surface-overlay: rgba(17, 27, 24, 0.82);
 
   --brand-900: #e6fbf5;
   --brand-800: #d5f5ed;
@@ -137,9 +137,9 @@ html[data-theme='dark'] {
   --ink-200: #3f4d48;
   --ink-100: #283431;
 
-  --line-soft: #1f2d29;
-  --line: #29372f;
-  --line-strong: #3a4c45;
+  --line-soft: #243029;
+  --line: #2f3d35;
+  --line-strong: #41544b;
 
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.28);
   --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.22);
@@ -266,6 +266,54 @@ select:focus-visible,
   -webkit-font-smoothing: antialiased;
 }
 
+/* ---------------------------------------------------------------------------
+   Material components ship with the prebuilt theme's Roboto typography (and
+   Roboto isn't even loaded here), so overlays — selects, menus, datepicker,
+   dialogs, tooltips, snackbars — rendered in a mismatched fallback font.
+   Force our body font everywhere, and the heading font on titles.
+   (mat-icon keeps the Material Icons font — re-asserted below.)
+--------------------------------------------------------------------------- */
+.mat-mdc-select-panel,
+.mat-mdc-option,
+.mat-mdc-option .mdc-list-item__primary-text,
+.mat-mdc-menu-panel,
+.mat-mdc-menu-item,
+.mat-mdc-menu-item .mdc-list-item__primary-text,
+.mat-mdc-autocomplete-panel,
+.mat-mdc-select-value,
+.mat-mdc-select-placeholder,
+.mat-datepicker-content,
+.mat-calendar,
+.mat-calendar-body-cell-content,
+.mat-calendar-table-header,
+.mat-calendar-period-button,
+.mat-mdc-tooltip,
+.mat-mdc-tooltip .mdc-tooltip__surface,
+.mat-mdc-dialog-container,
+.mat-mdc-dialog-container .mdc-dialog__content,
+.mat-mdc-snack-bar-container,
+.mat-mdc-snack-bar-container .mdc-snackbar__label,
+.mat-mdc-form-field,
+.mat-mdc-input-element,
+.mat-mdc-floating-label,
+.mat-mdc-form-field-hint,
+.mat-mdc-form-field-error,
+.mdc-button__label {
+  font-family: var(--font-body) !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__title,
+.mat-calendar-period-button {
+  font-family: var(--font-heading) !important;
+}
+
+/* Keep icon ligatures on the icon font (guard against the rule above) */
+.mat-icon,
+.material-icons,
+.material-icons-round {
+  font-family: 'Material Icons Round', 'Material Icons' !important;
+}
+
 /* Form fields */
 .mat-mdc-form-field {
   width: 100%;
@@ -279,6 +327,19 @@ select:focus-visible,
 /* Brand-colored caret instead of the prebuilt theme's blue */
 .mat-mdc-input-element {
   caret-color: var(--brand-500) !important;
+}
+
+/* Remove native number spinners — they overlap suffixes (e.g. the currency code)
+   and clutter the clean field styling. Values are still typed normally. */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .mat-mdc-form-field,

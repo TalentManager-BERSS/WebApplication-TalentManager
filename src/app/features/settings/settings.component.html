@@ -99,7 +99,7 @@
         <mat-icon>trending_up</mat-icon>
         <div>
           <small>{{ 'settings.marginPreview' | translate }}</small>
-          <strong>{{ defaultMargin() | currency:persistedCurrency():'symbol':'1.2-2' }} <em>/ h</em></strong>
+          <strong>{{ defaultMargin() | money:persistedCurrency():'1.2-2' }} <em>/ h</em></strong>
         </div>
       </div>
 
@@ -140,26 +140,35 @@
             <mat-label>{{ 'employees.hourlyRate' | translate }}</mat-label>
             <input matInput type="number" min="0" step="0.5" formControlName="hourlyRate">
             <span matTextSuffix class="currency-suffix">{{ persistedCurrency() }}</span>
+            <mat-hint *ngIf="!formFor(employee).controls.hourlyRate.value">
+              {{ 'settings.usingDefault' | translate }} {{ (settings()?.defaultHourlyRate || 0) | money:persistedCurrency():'1.0-2' }}
+            </mat-hint>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'employees.hourlyCost' | translate }}</mat-label>
-            <input matInput type="number" min="0" step="0.5" formControlName="hourlyCost">
+            <input matInput type="number" min="0" step="0.5" formControlName="hourlyCost" (input)="syncMonthlyFromHourly(employee)">
             <span matTextSuffix class="currency-suffix">{{ persistedCurrency() }}</span>
+            <mat-hint *ngIf="!formFor(employee).controls.hourlyCost.value">
+              {{ 'settings.usingDefault' | translate }} {{ (settings()?.defaultHourlyCost || 0) | money:persistedCurrency():'1.0-2' }}
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="span-2">
+            <mat-label>{{ 'settings.monthlySalary' | translate }}</mat-label>
+            <input matInput type="number" min="0" step="50" formControlName="monthlyCost" (input)="syncHourlyFromMonthly(employee)">
+            <span matTextSuffix class="currency-suffix">{{ persistedCurrency() }}</span>
+            <mat-hint>{{ 'settings.monthlySalaryHint' | translate }}</mat-hint>
           </mat-form-field>
 
           <div class="roster-row__metrics">
             <div class="metric">
               <small>{{ 'employees.monthlyRate' | translate }}</small>
-              <strong>{{ monthlyRate(employee) | currency:persistedCurrency():'symbol':'1.0-0' }}</strong>
-            </div>
-            <div class="metric metric--cost">
-              <small>{{ 'employees.monthlyCost' | translate }}</small>
-              <strong>{{ monthlyCost(employee) | currency:persistedCurrency():'symbol':'1.0-0' }}</strong>
+              <strong>{{ monthlyRate(employee) | money:persistedCurrency():'1.0-0' }}</strong>
             </div>
             <div class="metric metric--margin">
               <small>{{ 'settings.marginPreview' | translate }}</small>
-              <strong>{{ marginFor(formFor(employee)) | currency:persistedCurrency():'symbol':'1.2-2' }} <em>/ h</em></strong>
+              <strong>{{ marginFor(formFor(employee)) | money:persistedCurrency():'1.2-2' }} <em>/ h</em></strong>
             </div>
           </div>
 

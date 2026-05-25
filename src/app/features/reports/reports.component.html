@@ -145,12 +145,7 @@
         <input matInput type="number" min="0" step="0.01" formControlName="inputAmount"
                [placeholder]="incomePlaceholder()">
         <span matTextSuffix class="currency-suffix">{{ currency() }}</span>
-        <mat-hint *ngIf="suggestedIncome() > 0">
-          {{ 'reports.incomeAutoHint' | translate }} {{ suggestedIncome() | currency:currency():'symbol':'1.0-2' }}
-        </mat-hint>
-        <mat-hint *ngIf="suggestedIncome() === 0">
-          {{ 'reports.incomeNoRateHint' | translate }}
-        </mat-hint>
+        <mat-hint>{{ 'reports.incomeHintShort' | translate }}</mat-hint>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -158,11 +153,21 @@
         <input matInput type="number" min="0" max="10" step="1" formControlName="score">
       </mat-form-field>
 
-      <div class="hours-preview span-2">
-        <mat-icon>timer</mat-icon>
-        <div>
-          <small>{{ 'reports.hoursPreview' | translate }}</small>
-          <strong>{{ hoursWorkedPreview() | number:'1.1-2' }} h</strong>
+      <div class="metric-preview span-2">
+        <div class="metric-preview__item">
+          <mat-icon>timer</mat-icon>
+          <div>
+            <small>{{ 'reports.hoursPreview' | translate }}</small>
+            <strong>{{ hoursWorkedPreview() | number:'1.1-2' }} h</strong>
+          </div>
+        </div>
+        <div class="metric-preview__item metric-preview__item--income">
+          <mat-icon>payments</mat-icon>
+          <div>
+            <small>{{ 'reports.incomePreview' | translate }}</small>
+            <strong *ngIf="effectiveIncome() > 0">{{ effectiveIncome() | money:currency():'1.0-2' }}</strong>
+            <strong *ngIf="effectiveIncome() === 0" class="metric-preview__hint">{{ 'reports.incomeNoRate' | translate }}</strong>
+          </div>
         </div>
       </div>
 
@@ -191,7 +196,7 @@
         <div class="daily-item__metrics">
           <small><mat-icon>schedule</mat-icon> {{ formatTime(summary.entryTime) }} - {{ formatTime(summary.exitTime) }}</small>
           <small><mat-icon>timer</mat-icon> {{ summary.hoursWorked | number:'1.1-2' }} h</small>
-          <small><mat-icon>payments</mat-icon> {{ summary.inputAmount | currency:currency():'symbol':'1.0-0' }}</small>
+          <small><mat-icon>payments</mat-icon> {{ summary.inputAmount | money:currency():'1.0-0' }}</small>
           <small><mat-icon>military_tech</mat-icon> {{ summary.score }}/10</small>
         </div>
       </div>
@@ -267,7 +272,7 @@
         <div class="summary-preview__chips">
           <small class="chip"><mat-icon>schedule</mat-icon> {{ summary.completionRate | number:'1.0-0' }}% {{ 'reports.hoursWord' | translate }}</small>
           <small class="chip"><mat-icon>timer</mat-icon> {{ summary.completedHours | number:'1.0-0' }}/{{ summary.totalHours }} h</small>
-          <small class="chip"><mat-icon>payments</mat-icon> {{ summary.totalInput | currency:currency():'symbol':'1.0-0' }}</small>
+          <small class="chip"><mat-icon>payments</mat-icon> {{ summary.totalInput | money:currency():'1.0-0' }}</small>
           <small class="chip"><mat-icon>military_tech</mat-icon> {{ summary.averageScore | number:'1.1-1' }}/10</small>
           <small class="chip"><mat-icon>event</mat-icon> {{ summary.dayCount }} {{ 'reports.days' | translate }}</small>
         </div>
